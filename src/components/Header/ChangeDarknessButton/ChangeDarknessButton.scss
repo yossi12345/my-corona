@@ -1,0 +1,20 @@
+.change-darkness-button{
+    display: flex;
+    align-items: center;
+    background-color: #39475d;
+    border-end-start-radius: 30px;
+    border-start-start-radius: 30px;
+    height: 35px;
+    width:44px; 
+    @media (min-width:490px){
+        margin-right: 25px;
+        width: 54px;
+        height: 44px;
+        padding: 0 8px 0 6px;
+    }
+    img{
+        width: 32px;
+        height: 32px;
+        margin: 0;
+    }
+}

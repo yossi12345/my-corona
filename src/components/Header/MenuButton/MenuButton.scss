@@ -1,0 +1,41 @@
+.menu-button{
+    width: 40px;
+    height: 36px;
+    // margin: 6px 0 0 5px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    row-gap:4px;
+    flex-direction: column;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    &:focus{
+        outline: 2px solid black;
+        border-radius: 2px;
+    }
+    div{
+        transition: all 0.2s ease-in-out;
+        width: 22.5px;
+        height: 2.5px;
+        background-color: #374f60;
+        border-radius: 10px;
+    }
+}
+.clicked{
+    row-gap: 0;
+    & :first-child{
+        transform: rotate(-51deg);
+        position: relative;
+        top:2px;
+    }
+    & :nth-child(2){
+        display: none;
+    }
+    & :last-child{
+        transform: rotate(52deg);
+        position: relative;
+        left:1px;
+    }
+}

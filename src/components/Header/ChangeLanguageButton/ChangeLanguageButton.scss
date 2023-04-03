@@ -1,0 +1,27 @@
+.change-language-button{
+    background-color: transparent;
+    position: absolute;
+    cursor: pointer;
+    left:60px;
+    top:9px;
+    border: none;
+    & :first-child{
+        font-size: 22px;
+        color: rgb(55, 79, 96);
+        border: 2px solid rgb(55, 79, 96);
+        background-color: white;
+        border-radius: 5px;
+        padding:0 2px;
+        line-height: 1;
+    }    
+    & :last-child{
+        position: relative;
+        left: 16px;
+        bottom:16px;
+        padding:0 5px;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(55, 79, 96);
+        font-size: 18px;
+    }
+}

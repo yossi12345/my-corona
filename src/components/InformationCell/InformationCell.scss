@@ -1,0 +1,59 @@
+$big-font:22.4px;
+$medium-font:17.6px;
+$small-font:12px;
+$number-color:#222b45;
+.generic-cell-first-row{
+    width:163.5px;
+    height: 184px;
+    color:$number-color;
+    background-color: white;
+    border-radius: 20px;
+    padding: 16px;
+}
+.total{
+    margin: 8px 0;
+}
+.number{
+    font-weight: 700;
+}
+// .cell-title-container{
+//     display: flex;
+//     h3{
+//         margin: 0;
+//         margin-left: 10px;
+//         font-size: 14.4px;
+//         max-width: 82px;
+//     }
+//     &>div{
+//         background-color: black;
+//         color: white;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         border-radius: 100%;
+//         width: 16.67px;
+//         height: 16.67px;
+//         font-size: 10px;
+//         margin-top: 7px;
+//     }
+
+// }
+.none{
+    display: none;
+}
+.generic-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.small-font{
+    font-size:$small-font;
+}
+.medium-font{
+    font-size:$medium-font;
+}
+.big-font{
+    font-size:$big-font;
+}
+.fancy-list{
+}
