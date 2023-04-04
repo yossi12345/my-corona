@@ -2,7 +2,6 @@
 @use "src/variables-and-mixins/screen-width-limits.scss" as screen-width;
 @use "src/variables-and-mixins/mixins.scss" as *;
 @import 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap';
-$card-border-radius:10px;//20
 // $upper:980px;
 // $middle:795px;
 // $low:690px;
@@ -15,6 +14,7 @@ $card-border-radius:10px;//20
 html{
     scroll-behavior: smooth;
     scroll-padding-top: 184px;
+    overflow-y: overlay;//לעשות שהסקרולבר יהיה על הדיו של הגוף בלבד כדי שהראש יסתיר אותו
 }
 ::-webkit-scrollbar{
     height: 6px;
@@ -30,13 +30,6 @@ html{
 ::-webkit-scrollbar-thumb{
     background-color:rgb(169,169,169);
     border-radius: 30px;
-}
-%basic-card{
-    background-color: white;
-    border-radius: $card-border-radius;
-    box-shadow: 3px 6px 14px 0 rgb(0 0 0 / 10%); 
-    //overflow: hidden;
-    padding: 10px;
 }
 .header-and-menu-and-nav-container{
     position: sticky;
@@ -55,16 +48,16 @@ html{
     // flex-direction: column;
     width: 100%;
     @media (min-width:screen-width.$lower){
-        margin-top: 184.5px;
+        padding-top: 188.5px;
     }
     @media (min-width:screen-width.$low){
-        margin-top: 174px;
+        padding-top: 178px;
     }
     @media (min-width:screen-width.$middle){
-        margin-top: 158.5px;
+        padding-top: 162.5px;
     }
     @media (min-width:screen-width.$upper){
-        margin-top: 140px;
+        padding: 144px 36px 36px;
     }
 }
 .total-number{
@@ -73,66 +66,6 @@ html{
     margin-bottom: 4px;
     @media (min-width:screen-width.$lower) {
         font-size: 22.4px;
-    }
-}
-.overview-chapter-container{
-    border-bottom: 1px solid gray;
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-    padding-bottom: 30px;
-    h2{
-        font-size: 19px;
-    }
-}
-.weekly-summary-overview-container{
-    background-color: white;
-    border-radius: 10px;
-    padding: 5px 0px 10px;
-    h3{
-        margin: 7px 17px 0  0;
-        font-size:16px;
-    }
-}
-.general-overview-cards-container,
-.weekly-summary-overview-cards-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10PX;
-    &>div{
-        display: flex;
-        gap: 10px;
-    }  
-}
-.general-overview-cards-container{
-    .card{
-        @extend %basic-card;
-        height: 184px;
-        width:42vw;
-        @media (min-width:screen-width.$lower) {
-            width:46.32vw;
-        }
-        @media (min-width:screen-width.$low) {
-            width:48vw;
-        }
-        @media (min-width:screen-width.$middle) {
-            width:14vw;
-        }
-    }
-}
-.weekly-summary-overview-cards-container{
-    padding:10px 15px ;
-    .card{
-        @extend %basic-card;
-        height: 150px;
-        width:42vw;//212.33
-        @media (min-width:screen-width.$low){
-            width: 45.322vw;
-        }
-        @media (min-width:screen-width.$middle){
-            width: 21.077vw;
-        }
     }
 }
 .general-chapter-container{

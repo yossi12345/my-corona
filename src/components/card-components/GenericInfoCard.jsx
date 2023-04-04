@@ -3,7 +3,7 @@ import CardList from "./CardList/CardList";
 import TitleAndDescriptionOfCard from "./TitleAndDescriptionOfCard/TitleAndDescriptionOfCard";
 function GenericInfoCard(props){
     return (
-        <div className={props.cardClass}>
+        <div className="card">
             <TitleAndDescriptionOfCard
                 description={props.description}
                 title={props.title}

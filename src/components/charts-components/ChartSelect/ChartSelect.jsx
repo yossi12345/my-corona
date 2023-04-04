@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react"
 import getTranslation from "../../../getTranslation"
 import "./ChartSelect.scss"
-function ChartSelect({sections={},setChartState,chartState={},inputsRefs}){
+function ChartSelect({sections=[],setChartState,chartState={},inputsRefs}){
     const [shouldSelectOpen,setShouldSelectOpen]=useState(false)
-    const inputRefs=useRef([])
+    // const inputRefs=useRef([])
     const [currentState,setCurrentState]=useState(()=>getInitialState())
     const [chartOptions,setChartOptions]=useState(()=>{
         const initialValueOfChartOptions=[]
@@ -15,14 +15,14 @@ function ChartSelect({sections={},setChartState,chartState={},inputsRefs}){
     })
     function getInitialState(){
         const initialState=[]
-        for (let i=0;i<sections.content.length;i++){
+        for (let i=0;i<sections.length;i++){
             initialState.push([])
-            for (let j=0;j<sections.content[i].options.length;j++){
+            for (let j=0;j<sections[i].options.length;j++){
                 initialState[i].push({
-                    type:sections.content[i].type,
+                    type:sections[i].type,
                     key:Math.random(),
-                    value:sections.content[i].options[j].option,
-                    isChecked:chartState[sections.content[i].options[j].option]
+                    value:sections[i].options[j].option,
+                    isChecked:chartState[sections[i].options[j].option]
                 })
             }
         }
@@ -56,7 +56,7 @@ function ChartSelect({sections={},setChartState,chartState={},inputsRefs}){
             {shouldSelectOpen&&<div 
                 className="chart-select-menu">
                 <ul>
-                    {sections.content.map(({title,options,type},sectionIndex)=>{
+                    {sections.map(({title,options,type},sectionIndex)=>{
                         return (
                             <div key={Math.random()}>
                                 <h4>{title}</h4>
@@ -67,7 +67,7 @@ function ChartSelect({sections={},setChartState,chartState={},inputsRefs}){
                                         <li key={currentState[sectionIndex][optionIndex].key}>{
                                             inputsRefs?
                                             <input type={type} value={option}
-                                                ref={(element)=>inputRefs.current[optionIndex]=element}
+                                                ref={(element)=>inputsRefs.current[optionIndex]=element}
                                                 checked={currentState[sectionIndex][optionIndex].isChecked}
                                                 onChange={()=> handleInputsChange(sectionIndex,optionIndex)}
                                             />:

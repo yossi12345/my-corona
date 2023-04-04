@@ -25,8 +25,9 @@ header{
 }
 .menu-button-and-logo-and-title-container{
     display: flex;
-    @media (max-width:screen-width.$middle) {
-        flex-wrap: wrap;
+    flex-wrap: wrap;
+    @media (min-width:screen-width.$middle) {
+        flex-wrap: nowrap;
     }
     @media (min-width:screen-width.$lower) {
         column-gap:20px;        
@@ -37,7 +38,7 @@ header{
     color:#222b45;
     white-space:nowrap;
     display: flex;
-    margin-right: 17px;
+    margin-right: 16px;
     align-items: center;
     @media (max-width:screen-width.$upper) {
         flex-wrap: wrap;

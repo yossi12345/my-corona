@@ -127,14 +127,14 @@ export const lastWeekSummary={
         ]
     }
 }
-export const hospitalizedAmountChart=[]
+export const dailyHospitalizedAmountChart=[]
 const startCoronaDate=new Date(2020,2,1)
 const today=new Date()
 let day=startCoronaDate
 do{
     day.setDate(day.getDate()+1)
     const dayCopy=new Date(day.getFullYear(),day.getMonth(),day.getDate())
-    hospitalizedAmountChart.push({
+    dailyHospitalizedAmountChart.push({
         seriouslySicks:Math.floor(Math.random()*25+80),
         sicks:Math.floor(Math.random()*17+17),
         miledSicks:Math.floor(Math.random()*140+233),

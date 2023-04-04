@@ -10,32 +10,22 @@ import {
   cumulativeDeceased,
   percentagePositivesFromYesterday,
   lastWeekSummary,
-  hospitalizedAmountChart,
+  dailyHospitalizedAmountChart,
 } from "./mockData"
 import GenericInfoCard from './components/card-components/GenericInfoCard';
 import TitleAndDescriptionOfCard from './components/card-components/TitleAndDescriptionOfCard/TitleAndDescriptionOfCard';
 import CardList from './components/card-components/CardList/CardList';
 import Menu from './components/Menu/Menu';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Chart from "react-apexcharts"
-import { 
-  ResponsiveContainer,
-  AreaChart, 
-  XAxis, 
-  YAxis,
-  Area,
-  Tooltip
-  ,CartesianGrid,
-  Legend,
-  Label
- } from 'recharts';
 import ChartSelect from './components/charts-components/ChartSelect/ChartSelect';
 import getTranslation from './getTranslation';
 import ShareButton from './components/charts-components/ShareButton/ShareButton';
 import MyToolTip from './components/charts-components/MyToolTip/MyToolTip';
 import { TempChart } from './components/tempChart';
+import OverViewChapter from './components/chapter-components/OverviewChapter/OverviewChapter';
 function App() {
-  const [areaChartState,setAreaChartState]=useState({ 
+  const [dailyHospitalizedAmountFirstChartState,setDailyHospitalizedAmountFirstChartState]=useState({ 
       miledSicks:true,
       sicks:true,
       seriouslySicks:true,
@@ -46,7 +36,6 @@ function App() {
       sixMonths:false
     }
   )
-  const [areaChartPeriodShow,setAreaChartPeriodShow]=useState(30)
   function handlePageLoad(){
     window.scrollTo(0,0)
   }
@@ -64,164 +53,38 @@ function App() {
     else
       document.body.style.overflow=""
   },[shouldMenuOpen])
-  useEffect(()=>{
-    if (areaChartState.lastMonth){
-      setAreaChartPeriodShow(30)
-    }
-    else if (areaChartState.untilNow){
-      setAreaChartPeriodShow(hospitalizedAmountChart.length)
-    }
-    else if (areaChartState.year){
-      setAreaChartPeriodShow(365)
-    }
-    else if (areaChartState.threeMonths){
-      setAreaChartPeriodShow(90)
-    }
-    else if (areaChartState.sixMonths){
-      setAreaChartPeriodShow(180)
-    }
-  },[areaChartState.lastMonth,
-    areaChartState.untilNow,
-    areaChartState.year,
-    areaChartState.threeMonths,
-    areaChartState.sixMonths
-  ])
  return (
     <>
-      <div className='header-and-menu-and-nav-container'>
-        <Header 
-          setShouldMenuOpen={setShouldMenuOpen}
-          shouldMenuOpen={shouldMenuOpen}
-        />
-        {shouldMenuOpen&&<Menu 
-          setShouldMenuOpen={setShouldMenuOpen}
-          shouldMenuOpen={shouldMenuOpen}
-        />}
-        <Nav chaptersRefs={chaptersRefs}/>
-      </div>
+      <div className='header-and-menu-and-nav-container'>
+        <Header setShouldMenuOpen={setShouldMenuOpen} 
+                shouldMenuOpen={shouldMenuOpen}/>
+        {shouldMenuOpen&&<Menu setShouldMenuOpen={setShouldMenuOpen}
+                               shouldMenuOpen={shouldMenuOpen}/>}
+        <Nav chaptersRefs={chaptersRefs}/>
+      </div>
+      <div className='body-container'>
+        <OverViewChapter overviewRef={chaptersRefs.current[0]}/>
+        <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[1]=element}>
+          <h3>מדדים מרכזיים</h3>
+          <div className='general-chapter-cards-container'>
+            <div className='card'>
+              <div className='chart-card-upper-part-container'>
+                <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
+                <ShareButton/>
+              </div>
+             
+                <div className='chart-container'></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
       <div className='body-container'>
-        <div className='overview-chapter-container'
-           ref={(element)=>chaptersRefs.current[0]=element}>
-          <h2>מבט על</h2>
-          <div className='general-overview-cards-container'>
-            <div>
-              <GenericInfoCard
-                cardClass="card"
-                description={cardGenericDescription}
-                title="מאומתים אתמול"
-                total={verifiedSicksFromYesterday.total}
-                totalClass="total-number"
-                listClasses="generic-list smaller-size-number smaller-size-words"
-                list={verifiedSicksFromYesterday.list}
-              />
-              <GenericInfoCard
-                cardClass="card"
-                description={cardGenericDescription}
-                title="חולים פעילים"
-                total={activeSicks.total}
-                totalClass="total-number margin-bottom16"
-                listClasses="generic-list smaller-size-number smaller-size-words"
-                list={activeSicks.list}
-              />
-            </div>
-            <div>
-              <div className='card'>
-                <TitleAndDescriptionOfCard
-                 title="חולים קשה" 
-                 description={cardGenericDescription}
-                />
-                <div className='total-number'>
-                  {seriouslySicks.total}
-                </div>
-                <CardList
-                  classes="fancy-list words number"
-                  members={[seriouslySicks.list[0], seriouslySicks.list[1], seriouslySicks.list[2]]}
-                  isNumberFirst={false}
-                />
-                <CardList
-                  classes='generic-list smaller-size-words smaller-size-number'
-                  members={[seriouslySicks.list[3], seriouslySicks.list[4]]}
-                  isNumberFirst={false}
-                />
-              </div>
-              <GenericInfoCard
-                cardClass="card"
-                description={cardGenericDescription}
-                title="מתחסנים"
-                total={vaccinated.total}
-                totalClass="total-number"
-                isNumberFirst={false}
-                listClasses="list-of-vaccinated words number"
-                list={vaccinated.list}
-              />
-            </div>
-            <div>
-              <div className='card'>
-                <TitleAndDescriptionOfCard
-                  title="נפטרים מצטבר"
-                  description={cardGenericDescription}
-                />
-                <div className='total-number'>
-                  {cumulativeDeceased.total}
-                </div>
-              </div>
-              <GenericInfoCard
-                cardClass="card"
-                description={cardGenericDescription}
-                title="אחוז נבדקים חיוביים אתמול"
-                total={percentagePositivesFromYesterday.total}
-                totalClass="total-number"
-                listClasses="generic-list smaller-size-number smaller-size-words"
-                list={percentagePositivesFromYesterday.list}
-              />
-            </div>
-          </div>
-          <div className='weekly-summary-overview-container'>
-            <h3>סיכום 7 ימים אחרונים</h3>
-            <div className='weekly-summary-overview-cards-container'>
-              <div>
-                <GenericInfoCard
-                  cardClass="card"
-                  description={cardGenericDescription}
-                  title="מספר המאומתים"
-                  total={lastWeekSummary.verified.total}
-                  totalClass="total-number margin-bottom16"
-                  listClasses="generic-list smaller-size-number smaller-size-words"
-                  list={lastWeekSummary.verified.list}
-                />
-                  <GenericInfoCard
-                  cardClass="card"
-                  description={cardGenericDescription}
-                  title="מספר חולים קשה"
-                  total={lastWeekSummary.seriouslySicks.total}
-                  totalClass="total-number margin-bottom16"
-                  listClasses="generic-list smaller-size-number smaller-size-words"
-                  list={lastWeekSummary.seriouslySicks.list}
-                />
-              </div>
-              <div>
-                <GenericInfoCard
-                  cardClass="card"
-                  description={cardGenericDescription}
-                  title="מספר נפטרים"
-                  total={lastWeekSummary.deceased.total}
-                  totalClass="total-number margin-bottom16"
-                  listClasses="generic-list smaller-size-number smaller-size-words"
-                  list={lastWeekSummary.deceased.list}
-                />
-                <GenericInfoCard
-                  cardClass="card"
-                  description={cardGenericDescription}
-                  title="מספר נבדקים"
-                  total={lastWeekSummary.tested.total}
-                  totalClass="total-number margin-bottom16"
-                  listClasses="generic-list smaller-size-number smaller-size-words"
-                  list={lastWeekSummary.tested.list}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+    
         <div className='general-chapter-container'
          ref={(element)=>chaptersRefs.current[1]=element}>
           <h3>מדדים מרכזיים</h3>
@@ -232,8 +95,8 @@ function App() {
                 <ShareButton/>
               </div>
               <ChartSelect 
-              chartState={areaChartState}
-              setChartState={setAreaChartState} 
+              chartState={dailyHospitalizedAmountFirstChartState}
+              setChartState={setDailyHospitalizedAmountFirstChartState} 
               sections={{
                 content:[
                   {
