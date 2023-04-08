@@ -11,7 +11,7 @@ function weeklySummary() {
                         title="מספר מאומתים"
                         total={lastWeekSummary.verified.total}
                         totalClass="total-number margin-bottom16"
-                        listClasses="generic-list smaller-size-number smaller-size-words"
+                        listClasses={["generic-list", "smaller-size-number","smaller-size-words"]}
                         list={lastWeekSummary.verified.list}
                     />
                     <GenericInfoCard
@@ -19,7 +19,7 @@ function weeklySummary() {
                         title="מספר חולים קשה"
                         total={lastWeekSummary.seriouslySicks.total}
                         totalClass="total-number margin-bottom16"
-                        listClasses="generic-list smaller-size-number smaller-size-words"
+                        listClasses={["generic-list", "smaller-size-number", "smaller-size-words"]}
                         list={lastWeekSummary.seriouslySicks.list}
                     />
                 </div>
@@ -29,7 +29,7 @@ function weeklySummary() {
                         title="מספר נפטרים"
                         total={lastWeekSummary.deceased.total}
                         totalClass="total-number margin-bottom16"
-                        listClasses="generic-list smaller-size-number smaller-size-words"
+                        listClasses={["generic-list" ,"smaller-size-number" ,"smaller-size-words"]}
                         list={lastWeekSummary.deceased.list}
                     />
                     <GenericInfoCard
@@ -37,7 +37,7 @@ function weeklySummary() {
                         title="מספר נבדקים"
                         total={lastWeekSummary.tested.total}
                         totalClass="total-number margin-bottom16"
-                        listClasses="generic-list smaller-size-number smaller-size-words"
+                        listClasses={["generic-list","smaller-size-number","smaller-size-words"]}
                         list={lastWeekSummary.tested.list}
                     />
                 </div>

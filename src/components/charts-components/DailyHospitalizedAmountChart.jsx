@@ -1,42 +1,40 @@
+import { useState,useEffect } from "react";
 import ChartSelect from "./ChartSelect/ChartSelect";
-import { 
+import {
     ResponsiveContainer,
-    AreaChart, 
-    XAxis, 
-    YAxis,
-    Area,
-    Tooltip
-    ,CartesianGrid,
-    Legend,
-    Label
-   } from 'recharts';
+    AreaChart,
+    XAxis,
+    YAxis,
+    Area,
+    Tooltip
+    , CartesianGrid,
+    Legend,
+    Label,
+} from 'recharts';
 import { dailyHospitalizedAmountChart } from "../../mockData";
-function DailyHospitalizedAmountChart(props){
-    const [periodShow,setPeriodShow]=useState(30)
-    useEffect(()=>{
-        if (props.chartState.lastMonth){
-          setPeriodShow(30)
-        }
-        else if (props.chartState.untilNow){
-          setPeriodShow(dailyHospitalizedAmountChart.length)
-        }
-        else if (props.chartState.year){
-          setPeriodShow(365)
-        }
-        else if (props.chartState.threeMonths){
-          setPeriodShow(90)
-        }
-        else if (props.chartState.sixMonths){
-          setPeriodShow(180)
-        }
-      },[
-            props.chartState.lastMonth,
-            props.chartState.untilNow,
-            props.chartState.year,
-            props.chartState.threeMonths,
-            props.chartState.sixMonths
-        ])
-    const sectionsOfChartSelect=[
+import getTranslation from "../../getTranslation";
+import MyToolTip from "./MyToolTip/MyToolTip";
+function DailyHospitalizedAmountChart(props) {
+    const [periodShow, setPeriodShow] = useState(30)
+    useEffect(() => {
+        if (props.state.lastMonth)
+            setPeriodShow(30)
+        else if (props.state.untilNow) 
+            setPeriodShow(dailyHospitalizedAmountChart.length)
+        else if (props.state.year) 
+            setPeriodShow(365)
+        else if (props.state.threeMonths) 
+            setPeriodShow(90)
+        else if (props.state.sixMonths) 
+            setPeriodShow(180)
+    }, [
+        props.state.lastMonth,
+        props.state.untilNow,
+        props.state.year,
+        props.state.threeMonths,
+        props.state.sixMonths
+    ])
+    const sectionsOfChartSelect = [
         {
             type: "checkbox",
             title: "מצב מאושפזים",
@@ -60,88 +58,72 @@ function DailyHospitalizedAmountChart(props){
     ]
     return (
         <>
-            <ChartSelect chartState={props.chartState}
-                setChartState={props.setChartState}
+            <ChartSelect state={props.state}
+                setState={props.setState}
                 sections={sectionsOfChartSelect} />
-                <div className="chart-container">
-                    <ResponsiveContainer>
-                        <AreaChart data={dailyHospitalizedAmountChart.slice(dailyHospitalizedAmountChart.length-periodShow)}>
-                            <Area 
-                                dataKey={"miledSicks"} 
-                                fill="#3c8c8c"
-                                fillOpacity={0.8}
-                                stroke="#3c8c8c" 
-                                className={props.chartState.miledSicks?"":"none"}/>
-                            <Area 
-                                dataKey={"sicks"} 
-                                fill="#ccda85"
-                                fillOpacity={0.8} 
-                                stroke="#b6ca51" 
-                                className={props.chartState.sicks?"":"none"}/>
-                            <Area 
-                                dataKey={"seriouslySicks"} 
-                                fill="#50cbfd" 
-                                fillOpacity={0.8}
-                                stroke="#50cbfd" 
-                                className={props.chartState.seriouslySicks?"":"none"}/>
-                            <XAxis tickMargin={5} dataKey="date"
-                                tickFormatter={(date)=>{
-                                    let day=date.getDate()
-                                    if (day<10)
-                                        day="0"+day
-                                    let month=date.getMonth()+1
-                                    if (month<10)
-                                        month="0"+month
-                                    return day+"."+month
-                                }}></XAxis>
-                        </AreaChart>
-                    </ResponsiveContainer>
-                </div>
+            <div className="chart-container">
+                <ResponsiveContainer>
+                    <AreaChart data={dailyHospitalizedAmountChart.slice(dailyHospitalizedAmountChart.length - periodShow)}>
+                        <Area 
+                            type="monotone"
+                            stackId="1"
+                            dataKey={"seriouslySicks"}
+                            fill="#84dbfe"
+                            fillOpacity={1}
+                            stroke="#50cbfd"
+                            strokeWidth={3}
+                            activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
+                            className={props.state.seriouslySicks ? "" : "none"} />
+                        <Area 
+                            type="monotone" 
+                            stackId="1"
+                            dataKey={"sicks"}
+                            fill="#bfcd78"
+                            fillOpacity={1}
+                            stroke="#b6ca51"
+                            strokeWidth={3}
+                            activeDot={{fill:"#b6ca51",stroke:"white",strokeWidth:0.7,r:6}}
+                            className={props.state.sicks ? "" : "none"} />
+                        <Area 
+                            type="monotone"
+                            stackId="1"
+                            dataKey={"miledSicks"}
+                            fill="#65a4a4"
+                            fillOpacity={1}
+                            stroke="#237d7d"
+                            strokeWidth={3}
+                            activeDot={{fill:"#237d7d",stroke:"white", strokeWidth:0.7,r:6}}
+                            className={props.state.miledSicks ? "" : "none"} />
+                        <XAxis tickMargin={3} dataKey="date" style={{fontSize:12}}
+                            tickFormatter={(date) => {
+                                let day = date.getDate()
+                                if (day < 10)
+                                    day = "0" + day
+                                let month = date.getMonth() + 1
+                                if (month < 10)
+                                    month = "0" + month
+                                return day + "." + month
+                            }}>
+                            <Label position="insideBottom" offset={-3} style={{fontSize:14}}>תאריך</Label>
+                        </XAxis>
+                        <YAxis axisLine={false} tickLine={false} tickCount={6} tickMargin={20} style={{fontSize:12}}>
+                            <Label width={3} position="top" offset={17} style={{fontSize:14}}>מספר מאושפזים</Label>
+                        </YAxis>
+                        <Legend
+                            iconType="circle"
+                            iconSize={8}
+                            layout="horizontal"
+                            verticalAlign="top"
+                            align="start"
+                            height={35}
+                            formatter={value => (<span className="chart-legend">{getTranslation(value)}</span>)}
+                        />
+                        <CartesianGrid vertical={false} stroke="#e7e7e7"/>
+                        <Tooltip shared={false} content={<MyToolTip />} />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
         </>
     )
 }
-/*                 <ResponsiveContainer  height="100%" width="95%">
-                  <AreaChart data={hospitalizedAmountChart.slice(hospitalizedAmountChart.length-areaChartPeriodShow)}>
-                    <Area dataKey={"miledSicks"} fill="#3c8c8c" stroke="#3c8c8c"
-                    className={areaChartState.miledSicks?"":"none"} fillOpacity={0.8}/>
-                    <Area dataKey={"sicks"} fill="#CCDA85" stroke='#b6CA51'
-                     className={areaChartState.sicks?"":"none"} fillOpacity={0.8}/>
-                   <Area dataKey={"seriouslySicks"} fill="#50CBFD" stroke="#50CBFD" fillOpacity={0.8}
-                   className={areaChartState.seriouslySicks?"":"none"}/>
-                    <XAxis tickMargin={5} dataKey="date"
-                      tickFormatter={(date) => {
-                        let day=date.getDate()
-                        if (day<10)
-                          day="0"+day
-                        let month=date.getMonth()+1
-                        if (month<10)
-                          month="0"+month
-                        return day+"."+month
-                    }}>
-                      <Label position="insideBottom" offset={-3}>תאריך</Label>
-                    </XAxis>
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    tickCount={6} 
-                    tickMargin={20}
-                    >
-                      <Label width={3} position="top" offset={17}>מספר מאושפזים</Label>
-                  </YAxis>
-                <Legend 
-                  iconType='circle' 
-                  iconSize={8} 
-                  layout="horizontal" 
-                  verticalAlign="top"
-                  align="start"
-                  height={40}
-                  formatter={(value)=>{
-                    return <span className='chart-legend'>{getTranslation(value)}</span>
-                  }}
-                  />
-                  <CartesianGrid vertical={false}/>
-              
-                    <Tooltip shared={false} content={<MyToolTip/>}/>
-                  </AreaChart>
-                </ResponsiveContainer> */
 export default DailyHospitalizedAmountChart;

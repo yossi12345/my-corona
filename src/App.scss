@@ -78,7 +78,6 @@ html{
 .general-chapter-cards-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap:20.8px;
     @media (min-width:screen-width.$middle){
         gap:10px;
@@ -98,8 +97,7 @@ html{
         @media (min-width:screen-width.$middle){
             width: 30vw;
         }
-    }
-    
+    }  
 }
 .margin-bottom16{
     margin-bottom:16px;

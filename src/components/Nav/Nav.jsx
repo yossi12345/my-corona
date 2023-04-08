@@ -11,7 +11,7 @@ function Nav(props){
     const navRef=useRef(null)
     const [pageYUserPlace,setPageYUserPlace]=useState(0)
     const linksRefs=useRef([])
-    const [linksClasses,setLinksClasses]=useState(["active2","","","","","","","","","","","",""])
+    const [linksClasses,setLinksClasses]=useState(["active","","","","","","","","","","","",""])
     function handleNavClick(index){
         myChaptersRefs.current[index].scrollIntoView()
         // if (!!myChaptersRefs&&myChaptersRefs.current[index]!=undefined&& 
@@ -41,7 +41,7 @@ function Nav(props){
                 console.log("2",myChaptersRefs.current[i].offsetTop+myChaptersRefs.current[i].offsetHeight)
                 console.log("3",window.pageYOffset)
                 linksRefs.current[i].scrollIntoView({block:"center",inline:"center"})
-                linksClassesCopy[i]="active2"
+                linksClassesCopy[i]="active"
             }
             else
                 linksClassesCopy[i]=""

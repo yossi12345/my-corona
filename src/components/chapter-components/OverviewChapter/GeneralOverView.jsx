@@ -19,7 +19,7 @@ function GeneralOverview() {
                     title="מאומתים אתמול"
                     total={verifiedSicksFromYesterday.total}
                     totalClass="total-number"
-                    listClasses="generic-list smaller-size-number smaller-size-words"
+                    listClasses={["generic-list","smaller-size-number","smaller-size-words"]}
                     list={verifiedSicksFromYesterday.list}
                 />
                 <GenericInfoCard
@@ -27,7 +27,7 @@ function GeneralOverview() {
                     title="חולים פעילים"
                     total={activeSicks.total}
                     totalClass="total-number margin-bottom16"
-                    listClasses="generic-list smaller-size-number smaller-size-words"
+                    listClasses={["generic-list","smaller-size-number","smaller-size-words"]}
                     list={activeSicks.list}
                 />
             </div>
@@ -37,11 +37,11 @@ function GeneralOverview() {
                     <div className='total-number'>
                         {seriouslySicks.total}
                     </div>
-                    <CardList classes='fancy-list words number'
+                    <CardList classes={["fancy-list","words","number"]}
                         members={[seriouslySicks.list[0], seriouslySicks.list[1], seriouslySicks.list[2]]}
                         isNumberFirst={false}
                     />
-                    <CardList classes='generic-list smaller-size-words smaller-size-number'
+                    <CardList classes={["generic-list","smaller-size-words","smaller-size-number"]}
                         members={[seriouslySicks.list[3], seriouslySicks.list[4]]}
                         isNumberFirst={false}
                     />
@@ -52,7 +52,7 @@ function GeneralOverview() {
                     total={vaccinated.total}
                     totalClass="total-number"
                     isNumberFirst={false}
-                    listClasses="list-of-vaccinated words number"
+                    listClasses={["list-of-vaccinated", "words", "number"]}
                     list={vaccinated.list}
                 />
             </div>
@@ -68,7 +68,7 @@ function GeneralOverview() {
                     title="אחוז נבדקים חיוביים אתמול"
                     total={percentagePositivesFromYesterday.total}
                     totalClass="total-number"
-                    listClasses="generic-list smaller-size-number smaller-size-words"
+                    listClasses={["generic-list" ,"smaller-size-number" ,"smaller-size-words"]}
                     list={percentagePositivesFromYesterday.list}
                 />
             </div>
