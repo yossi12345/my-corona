@@ -6,22 +6,21 @@
 // $middle:795px;
 // $low:690px;
 // $lower:490px;
+//$tiny:410px;
 *{
     box-sizing: border-box;
     direction: rtl;
     font-family: "Open Sans";
 }
 html{
-    scroll-behavior: smooth;
-    scroll-padding-top: 184px;
-    overflow-y: overlay;//לעשות שהסקרולבר יהיה על הדיו של הגוף בלבד כדי שהראש יסתיר אותו
+    // scroll-behavior: smooth;
+    // scroll-padding-top: 184px;
+    overflow: hidden;//לעשות שהסקרולבר יהיה על הדיו של הגוף בלבד כדי שהראש יסתיר אותו
 }
+
 ::-webkit-scrollbar{
     height: 6px;
     width: 10px;
-    @media (max-width:screen-width.$lower) {
-        display: none;
-    }
 }
 ::-webkit-scrollbar-truck{
     background-color: transparent;
@@ -41,23 +40,46 @@ html{
     }
 }
 .body-container{
+    height: 100vh;
+    overflow-y:overlay;
+    overflow-x: hidden;
     background-color:#E9EDF3;
-    padding:4px 16px 36px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 60px;
+    @media (min-width:screen-width.$lower){
+        scroll-padding-top: 184px;
+    }
+    @media (min-width:screen-width.$low){
+        scroll-padding-top: 174px;
+    }
+    @media (min-width:screen-width.$middle){
+        scroll-padding-top: 158px;
+    }
+    @media (min-width:screen-width.$upper){
+        scroll-padding-top: 140px;
+    }
+
+}
+.all-chapters-container{
+    padding:0 16px 36px;
+    //margin-top: 4px;
     // display: flex; 
     // align-items: center;
     // flex-direction: column;
-    width: 100%;
+    // height: 100%;
+    // overflow: auto;
     @media (min-width:screen-width.$lower){
-        padding-top: 188.5px;
+        //margin-top: 188.5px;
     }
     @media (min-width:screen-width.$low){
-        padding-top: 178px;
+       // margin-top: 178px;
     }
     @media (min-width:screen-width.$middle){
-        padding-top: 162.5px;
+        //margin-top: 162.5px;
     }
     @media (min-width:screen-width.$upper){
-        padding: 144px 36px 36px;
+        padding: 0 36px 36px;
+        //margin-top: 144px;
     }
 }
 .total-number{
@@ -66,6 +88,24 @@ html{
     margin-bottom: 4px;
     @media (min-width:screen-width.$lower) {
         font-size: 22.4px;
+    }
+}
+.overview-chapter-container{
+    border-bottom: 1px solid gray;
+    padding-bottom: 30px;
+    padding-top: 4px;
+    @media (min-width:screen-width.$lower){
+        padding-top: 188.5px;
+    }
+    @media (min-width:screen-width.$low){
+       padding-top: 178px;
+    }
+    @media (min-width:screen-width.$middle){
+        padding-top: 162.5px;
+    }
+    @media (min-width:screen-width.$upper){
+        padding: 144px 36px 36px;
+        //margin-top: 144px;
     }
 }
 .general-chapter-container{

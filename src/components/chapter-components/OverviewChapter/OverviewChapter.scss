@@ -1,12 +1,5 @@
 @use "src/variables-and-mixins/screen-width-limits.scss" as screen-width;
 @use "src/variables-and-mixins/mixins.scss" as *;
-.overview-chapter-container{
-    border-bottom: 1px solid gray;
-    padding-bottom: 30px;
-    h3{
-        font-size: 19px;
-    }
-}
 .weekly-summary-overview-container{
     background-color: white;
     border-radius: 10px;

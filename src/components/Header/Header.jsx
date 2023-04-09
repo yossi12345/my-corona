@@ -5,53 +5,24 @@ import "./Header.scss"
 import ChangeLanguageButton from "./ChangeLanguageButton/ChangeLanguageButton";
 import ChangeDarknessButton from "./ChangeDarknessButton/ChangeDarknessButton";
 function Header(props){
-    const [date,setDate]=useState(null)
+    const [updateDate,setUpdateDate]=useState(null)
     useEffect(()=>{
-        function convertMonthNumberToMonth(monthNumber){
-            switch(monthNumber){
-                case 1:
-                    return "ינואר"
-                case 2:
-                   return "פברואר"
-                case 3:
-                    return "מרץ"
-                case 4:
-                    return "אפריל"
-                case 5:
-                    return "מאי"
-                case 6:
-                    return "יוני"
-                case 7:
-                    return "יולי" 
-                case 8:
-                   return "אוגוסט" 
-                case 9:
-                    return "ספטמבר"
-                case 10:
-                    return "אוקטובר"
-                case 11:
-                    return "נובמבר"
-                case 12:
-                    return "דצמבר"
-                default:
-                    return
-            }
+        const monthsInHebrew=[
+            "ינואר","פברואר","מרץ",
+            "אפריל","מאי","יוני","יולי",
+            "אוגוסט","ספטמבר","אוקטובר",
+            "נובמבר","דצמבר"
+        ]
+        const dateObj={
+            year:props.lastDataUpdate.getFullYear(),
+            month: monthsInHebrew[props.lastDataUpdate.getMonth()],
+            day: props.lastDataUpdate.getDate(),
+            hour: props.lastDataUpdate.getHours()<10?("0"+props.lastDataUpdate.getHours()):props.lastDataUpdate.getHours(),
+            minute: props.lastDataUpdate.getMinutes()<10?("0"+props.lastDataUpdate.getMinutes()):props.lastDataUpdate.getMinutes()
         }
-        const fullDate=new Date()
-        const dateObj=
-        {
-            year:fullDate.getFullYear(),
-            month: fullDate.getMonth()+1,
-            day: fullDate.getDate(),
-            hour: fullDate.getHours(),
-            minute: fullDate.getMinutes()
-        }
-        let tranlatedFullDate=dateObj.day+" ב"+convertMonthNumberToMonth(dateObj.month)
-        if (dateObj.minute<10)
-            dateObj.minute="0"+dateObj.minute
-        tranlatedFullDate+=" "+dateObj.year+" | "+dateObj.hour+":"+dateObj.minute
-        setDate(tranlatedFullDate)
-    },[])
+        const tranlatedFullDate=dateObj.day+" ב"+dateObj.month+" "+dateObj.year+" | "+dateObj.hour+":"+dateObj.minute
+        setUpdateDate(tranlatedFullDate)
+    },[props.lastDataUpdate])
     return (
         <header onClick={()=>{
             if (props.shouldMenuOpen)
@@ -68,7 +39,7 @@ function Header(props){
                         <div></div>
                     </div>
                     <div>
-                        עדכון אחרון: {date}
+                        עדכון אחרון: {updateDate}
                     </div>
                 </div>
             </div>

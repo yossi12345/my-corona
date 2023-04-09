@@ -14,6 +14,7 @@ import {
 import { dailyHospitalizedAmountChart } from "../../mockData";
 import getTranslation from "../../getTranslation";
 import MyToolTip from "./MyToolTip/MyToolTip";
+import CustomDot from "./CustomDot";
 function DailyHospitalizedAmountChart(props) {
     const [periodShow, setPeriodShow] = useState(30)
     useEffect(() => {
@@ -73,7 +74,7 @@ function DailyHospitalizedAmountChart(props) {
                             stroke="#50cbfd"
                             strokeWidth={3}
                             activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
-                            className={props.state.seriouslySicks ? "" : "none"} />
+                            className={props.state.seriouslySicks?"":"none"}/>
                         <Area 
                             type="monotone" 
                             stackId="1"
