@@ -1,10 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-// import Temp from "../Temp/Temp.jsx";
 import "./Nav.scss";
-import { Link } from "react-router-dom";
-//import { HashLink } from "react-router-hash-link";
-//import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 function Nav(props){
     const links=[
         {link:"מבט על",to:"overview"},
@@ -27,27 +23,10 @@ function Nav(props){
              {links.map(({link,to},index)=>(
                 <BrowserRouter key={Math.random()}>
                     <li>
-                        {/* <a ref={(element)=>props.linksRefs.current[index]=element}
-                        className={props.linksClasses[index]}
-                        href={"#"+to}>{link}</a> */} 
-                        <Link onClick={(event)=>{
-                             props.bodyRef.current.removeEventListener("scroll",props.handleScroll)
-                            //console.log(props.bodyRef.current.hasEventListener("scroll",props.handleScroll))
-                           
-                            //props.updateNav(index)
-                            //props.chaptersRefs.current[index].scrollIntoView()
-                            //props.bodyRef.current.addEventListener("scroll",props.handleScroll)
-                           // setTimeout(()=>{
-
-                               //props.bodyRef.current.addEventListener("scroll",props.handleScroll)
-                                console.log("2")
-                           // },4000)
-                        }} className={props.linksClasses[index]}
+                        <HashLink to={"/#"+to} className={props.linksClasses[index]}
                              ref={(element)=>props.linksRefs.current[index]=element}>
-                            <span onClick={()=>{
-                            
-                            }}>{link}</span>
-                        </Link>
+                                {link}
+                        </HashLink>
                     </li>
                 </BrowserRouter>
                 ))}

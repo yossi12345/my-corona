@@ -32,19 +32,21 @@ function GeneralOverview() {
                 />
             </div>
             <div>
-                <div className='card'>
-                    <TitleAndDescriptionOfCard title="חולים קשה" description={cardGenericDescription} />
-                    <div className='total-number'>
-                        {seriouslySicks.total}
+                <div className="relative">
+                    <div className='card'>
+                        <TitleAndDescriptionOfCard title="חולים קשה" description={cardGenericDescription} />
+                        <div className='total-number'>
+                            {seriouslySicks.total}
+                        </div>
+                        <CardList classes={["fancy-list","words","number"]}
+                            members={[seriouslySicks.list[0], seriouslySicks.list[1], seriouslySicks.list[2]]}
+                            isNumberFirst={false}
+                        />
+                        <CardList classes={["generic-list","smaller-size-words","smaller-size-number"]}
+                            members={[seriouslySicks.list[3], seriouslySicks.list[4]]}
+                            isNumberFirst={false}
+                        />
                     </div>
-                    <CardList classes={["fancy-list","words","number"]}
-                        members={[seriouslySicks.list[0], seriouslySicks.list[1], seriouslySicks.list[2]]}
-                        isNumberFirst={false}
-                    />
-                    <CardList classes={["generic-list","smaller-size-words","smaller-size-number"]}
-                        members={[seriouslySicks.list[3], seriouslySicks.list[4]]}
-                        isNumberFirst={false}
-                    />
                 </div>
                 <GenericInfoCard
                     description={cardGenericDescription}
@@ -57,10 +59,12 @@ function GeneralOverview() {
                 />
             </div>
             <div>
-                <div className='card'>
-                    <TitleAndDescriptionOfCard title="נפטרים מצטבר" description={cardGenericDescription} />
-                    <div className='total-number'>
-                        {cumulativeDeceased.total}
+                <div className="relative">
+                    <div className='card'>
+                        <TitleAndDescriptionOfCard title="נפטרים מצטבר" description={cardGenericDescription} />
+                        <div className='total-number'>
+                            {cumulativeDeceased.total}
+                        </div>
                     </div>
                 </div>
                 <GenericInfoCard

@@ -15,9 +15,11 @@
 html{
     // scroll-behavior: smooth;
     // scroll-padding-top: 184px;
-    overflow: hidden;//לעשות שהסקרולבר יהיה על הדיו של הגוף בלבד כדי שהראש יסתיר אותו
+    overflow: hidden;
 }
-
+body{
+    margin: 0;
+}
 ::-webkit-scrollbar{
     height: 6px;
     width: 10px;
@@ -44,7 +46,7 @@ html{
     overflow-y:overlay;
     overflow-x: hidden;
     background-color:#E9EDF3;
-    scroll-behavior: smooth;
+    //scroll-behavior: smooth;
     scroll-padding-top: 60px;
     @media (min-width:screen-width.$lower){
         scroll-padding-top: 184px;
@@ -104,7 +106,7 @@ html{
         padding-top: 162.5px;
     }
     @media (min-width:screen-width.$upper){
-        padding: 144px 36px 36px;
+        padding-top: 144px;
         //margin-top: 144px;
     }
 }
@@ -125,10 +127,7 @@ html{
     .card,.table-card{
         height: 350px;
     }
-    .image-card{
-        height: 116px;
-    }
-    .card,.image-card,.table-card{
+    .card,.table-card{
         @extend %basic-card;
         width: 93vw;
         @media (min-width:screen-width.$tiny) and (max-width:screen-width.$lower){
@@ -159,4 +158,7 @@ html{
 }
 .none{
     display: none;
+}
+.relative{
+    position: relative;
 }

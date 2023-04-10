@@ -11,18 +11,31 @@ import {
   percentagePositivesFromYesterday,
   lastWeekSummary,
   dailyHospitalizedAmountChart,
+  verifiedChildrenTrendChart,
 } from "./mockData"
 import GenericInfoCard from './components/card-components/GenericInfoCard';
 import TitleAndDescriptionOfCard from './components/card-components/TitleAndDescriptionOfCard/TitleAndDescriptionOfCard';
-import CardList from './components/card-components/CardList/CardList';
 import Menu from './components/Menu/Menu';
 import React, { useEffect, useRef, useState,useMemo } from 'react';
-import ChartSelect from './components/charts-components/ChartSelect/ChartSelect';
-import getTranslation from './getTranslation';
 import ShareButton from './components/charts-components/ShareButton/ShareButton';
-import MyToolTip from './components/charts-components/MyToolTip/MyToolTip';
 import OverViewChapter from './components/chapter-components/OverviewChapter/OverviewChapter';
 import DailyHospitalizedAmountChart from './components/charts-components/DailyHospitalizedAmountChart';
+import VerifiedChildrenTrendChart from './components/charts-components/VerifiedChildrenTrendChart';
+import map1 from "./card-images/map1.PNG"
+import map2 from "./card-images/map2.PNG"
+import map3 from "./card-images/map3.PNG"
+import map4 from "./card-images/map4.PNG"
+import map5 from "./card-images/map5.PNG"
+import map6 from "./card-images/map6.PNG"
+import map7 from "./card-images/map7.PNG"
+import map8 from "./card-images/map8.PNG"
+import map9 from "./card-images/map9.PNG"
+import map10 from "./card-images/map10.PNG"
+import map11 from "./card-images/map11.PNG"
+import exel from "./card-images/exel.PNG"
+import testTubes from "./card-images/test-tubes.PNG"
+import ImageCard from './components/card-components/ImageCard/ImageCard';
+
 function App() {
   const [stateOfDailyHospitalizedAmountFirstChart,setStateOfDailyHospitalizedAmountFirstChart]=useState({ 
       miledSicks:true,
@@ -35,6 +48,25 @@ function App() {
       sixMonths:false
     }
   )
+  const [stateOfDailyHospitalizedAmountSecondChart,setStateOfDailyHospitalizedAmountSecondChart]=useState({ 
+        miledSicks:false,
+        sicks:false,
+        seriouslySicks:true,
+        lastMonth:true,
+        untilNow:false,
+        year:false,
+        threeMonths:false,
+        sixMonths:false
+      }
+    )
+  const [stateOfVerifiedChildrenTrendChart,setStateOfVerifiedChildrenTrendChart]=useState({ 
+        lastMonth:true,
+        untilNow:false,
+        year:false,
+        threeMonths:false,
+        sixMonths:false
+      }
+    )
   const lastDataUpdate=useMemo(()=>{
     return new Date()
   },[])
@@ -46,15 +78,15 @@ function App() {
     window.scrollTo(0,0)
   }
   function updateNav(linkIndex){
-    const linksClassesCopy=["","","","","","","","","","","","",""]
+    const newLinksClasses=["","","","","","","","","","","","",""]
     const linkRect=linksRefs.current[linkIndex].getBoundingClientRect()
     const navRect=navRef.current.getBoundingClientRect()
     const scrollX=linkRect.left-navRect.left-(navRect.width-linkRect.width)/2
     navRef.current.scroll({
         left:navRef.current.scrollLeft+scrollX
     })
-    linksClassesCopy[linkIndex]="active"
-    setLinksClasses(linksClassesCopy)
+    newLinksClasses[linkIndex]="active"
+    setLinksClasses(newLinksClasses)
   }
   function getChapterIndexUserIn(){
     const userPlace=bodyRef.current.scrollTop
@@ -71,23 +103,13 @@ function App() {
     }
     return -1
   }
-  function handleScroll(e){
-    console.log("HANDLE",e)
-    const userChapter=getChapterIndexUserIn()
-    if (userChapter!==-1){
-      updateNav(userChapter)
-    }
-  }
   const [shouldMenuOpen,setShouldMenuOpen]=useState(false)
   const chaptersRefs=useRef([]);
   const allChaptersRef=useRef(null) 
   useEffect(()=>{
     window.addEventListener("load",handlePageLoad)
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAA")
-    bodyRef.current.addEventListener("scroll",handleScroll)
     return ()=>{
       window.removeEventListener("load",handlePageLoad)
-      bodyRef.current.removeEventListener("scroll",handleScroll)
     }
   },[])
   useEffect(()=>{
@@ -98,16 +120,17 @@ function App() {
   },[shouldMenuOpen])
  return (
     <div className='body-container' ref={bodyRef} onScroll={()=>{
-      
+      const userChapter=getChapterIndexUserIn()
+      if (userChapter!==-1){
+        updateNav(userChapter)
+      }
     }}>
       <div className='header-and-menu-and-nav-container'>
         <Header setShouldMenuOpen={setShouldMenuOpen} 
                 shouldMenuOpen={shouldMenuOpen} lastDataUpdate={lastDataUpdate}/>
         {shouldMenuOpen&&<Menu setShouldMenuOpen={setShouldMenuOpen}
                                shouldMenuOpen={shouldMenuOpen}/>}
-        <Nav linksClasses={linksClasses} linksRefs={linksRefs} 
-          navRef={navRef} updateNav={updateNav} 
-          bodyRef={bodyRef} handleScroll={handleScroll} chaptersRefs={chaptersRefs}
+        <Nav linksClasses={linksClasses} linksRefs={linksRefs} navRef={navRef}
         />
       </div>
       <div className='all-chapters-container' ref={allChaptersRef}>
@@ -117,13 +140,15 @@ function App() {
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[1]=element} id="major-indicators">
           <h3>מדדים מרכזיים</h3>
           <div className='general-chapter-cards-container'>
-            <div className='card'>
-              <div className='chart-card-upper-part-container'>
-                <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
-                <ShareButton/>
+            <div className='relative'>
+              <div className='card'>
+                <div className='chart-card-upper-part-container'>
+                  <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
+                  <ShareButton/>
+                </div>
+                <DailyHospitalizedAmountChart state={stateOfDailyHospitalizedAmountFirstChart}
+                setState={setStateOfDailyHospitalizedAmountFirstChart}/>
               </div>
-              <DailyHospitalizedAmountChart state={stateOfDailyHospitalizedAmountFirstChart}
-               setState={setStateOfDailyHospitalizedAmountFirstChart}/>
             </div>
             <div className='card'></div>
             <div className='card'></div>
@@ -139,7 +164,15 @@ function App() {
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[3]=element} id="morbidity-and-children-hospitalizations">
           <h3>תחלואה ואשפוזי ילדים</h3>
           <div className='general-chapter-cards-container'>
-            <div className='card'></div>
+            <div className='relative'>
+              <div className='card'>
+                <div className='chart-card-upper-part-container'>
+                    <TitleAndDescriptionOfCard title="מגמת ילדים מאומתים - ממוצע נע 7 ימים" description={cardGenericDescription}/>
+                    <ShareButton/>
+                </div>
+                <VerifiedChildrenTrendChart state={stateOfVerifiedChildrenTrendChart} setState={setStateOfVerifiedChildrenTrendChart}/>
+              </div>
+            </div>
             <div className='card'></div>
             <div className='card'></div>
             <div className='card'></div>
@@ -153,9 +186,18 @@ function App() {
             <div className='card'></div>
             <div className='card'></div>
             <div className='card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
+            <ImageCard imgSrc={map1} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={map2} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={map3} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
           </div>
         </div>
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[5]=element} id="effect-of-vaccination-on-morbidity">
@@ -169,7 +211,16 @@ function App() {
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[6]=element} id="seriously-sicks-and-hospitalized">
           <h3>חולים קשה ומאושפזים</h3>
           <div className='general-chapter-cards-container'>
-            <div className='card'></div>
+          <div className='relative'>
+              <div className='card'>
+                <div className='chart-card-upper-part-container'>
+                  <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
+                  <ShareButton/>
+                </div>
+                <DailyHospitalizedAmountChart state={stateOfDailyHospitalizedAmountSecondChart}
+                setState={setStateOfDailyHospitalizedAmountSecondChart}/>
+              </div>
+            </div>
             <div className='card'></div>
           </div>
         </div>
@@ -186,9 +237,18 @@ function App() {
             <div className='card'></div>
             <div className='card'></div>
             <div className='card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
+            <ImageCard imgSrc={map4} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={map5} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={testTubes} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
           </div>
         </div>
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[9]=element} id="other-investigations">
@@ -197,9 +257,18 @@ function App() {
             <div className='card'></div>
             <div className='card'></div>
             <div className='card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
+            <ImageCard imgSrc={map6} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={exel} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={exel} title="מבודדים לפי רשות מקומית וגיל " 
+              explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
+              link="experience.argics.com"
+            />
           </div>
         </div>
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[10]=element} id="recurrent-morbidity-and-recovered">
@@ -217,9 +286,21 @@ function App() {
             <div className='card'></div>
             <div className='card'></div>
             <div className='table-card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
+            <ImageCard imgSrc={map8} 
+              title="התחסנות לקורונה"
+              explanation="נתוני אוכלוסיית מחוסנים בתוקף, לפי יישובים"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={map8} 
+              title="מוקדי התחסנות"
+              explanation="מפת מוקדי התחסנות נגד נגיף הקורונה, כולל נתונים אודות שעות פתיחה וניווט"
+              link="experience.argics.com"
+            />
+            <ImageCard imgSrc={exel} 
+              title="טבלת גילאי מתחסנים"
+              explanation="מספר המתחסנים במנה הראשונה והשנייה לפי גילאים"
+              link="data.gov.il"
+            />
           </div>
         </div>
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[12]=element} id="cities-traffic-lights">
@@ -227,9 +308,21 @@ function App() {
           <div className='general-chapter-cards-container'>
             <div className='table-card'></div>
             <div className='card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
-            <div className='image-card'></div>
+            <ImageCard imgSrc={map9} 
+              title="מפת מדדי רמזור"
+              explanation="מדדי תחלואה וציוני רמזור, בחלוקה לפי יישובים ורובעים"
+              link="experience.arcgis.com"
+            />
+            <ImageCard imgSrc={map10} 
+              title="רובעי רמזור"
+              explanation='תמונת מצב מובחנת אודות אוכלוסיה, בתוך תשעת היישובים הגדולים בארץ, "רובעי רמזור"'
+              link="maps.arcgis.com"
+            />
+            <ImageCard imgSrc={map11} 
+              title="נתוני תחלואה לפי יישוב"
+              explanation="תמונת מצב לפי יישוב בקטגוריות- חולים פעילים, מבודדים, מאושפזים, נפטרים ומחוסנים בתוקף"
+              link="experience.arcgis.com"
+            />
           </div>
         </div>
       </div>

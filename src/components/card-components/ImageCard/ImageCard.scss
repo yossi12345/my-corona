@@ -1,0 +1,36 @@
+@use "src/variables-and-mixins/screen-width-limits.scss" as screen-width;
+@use "src/variables-and-mixins/mixins.scss" as *;
+.image-card{
+    height: 116px;
+    @extend %basic-card;
+    width: 93vw;
+    a{
+        display: flex;
+        gap:10px;
+        font-size: 14px;
+        cursor: pointer;
+        img{
+            user-select: none;
+            position: relative;
+            bottom:3px;
+        }
+    }
+    @media (min-width:screen-width.$tiny) and (max-width:screen-width.$lower){
+        width: 81vw;
+    }
+    @media (min-width:screen-width.$middle){
+        width: 30vw;
+    }
+}
+.image-card-title{
+    font-weight: 700;
+    font-size: 1rem;
+    margin:3px 0 5px;
+    color: #222b45;
+}
+.image-card-explanation-and-link-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:67%;
+}

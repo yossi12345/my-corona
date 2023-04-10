@@ -1,27 +1,22 @@
-import { useState,useEffect } from "react";
-import ChartSelect from "./ChartSelect/ChartSelect";
-import {
+import { 
     ResponsiveContainer,
-    AreaChart,
-    XAxis,
-    YAxis,
-    Area,
-    Tooltip,
-    CartesianGrid,
-    Legend,
-    Label,
-} from 'recharts';
-import { dailyHospitalizedAmountChart } from "../../mockData";
-import getTranslation from "../../getTranslation";
-import MyToolTip from "./MyToolTip/MyToolTip";
-// import CustomDot from "./CustomDot";
-function DailyHospitalizedAmountChart(props) {
+    LineChart,Line,
+    Label,XAxis,YAxis,
+    CartesianGrid,Tooltip,Legend
+} from "recharts"
+import ChartSelect from "./ChartSelect/ChartSelect"
+import { verifiedChildrenTrendChart } from "../../mockData"
+import getTranslation from "../../getTranslation"
+import MyToolTip from "./MyToolTip/MyToolTip"
+import { useEffect,useState } from "react"
+
+function VerifiedChildrenTrendChart(props){
     const [periodShow, setPeriodShow] = useState(30)
     useEffect(() => {
         if (props.state.lastMonth)
             setPeriodShow(30)
         else if (props.state.untilNow) 
-            setPeriodShow(dailyHospitalizedAmountChart.length)
+            setPeriodShow(verifiedChildrenTrendChart.length)
         else if (props.state.year) 
             setPeriodShow(365)
         else if (props.state.threeMonths) 
@@ -37,15 +32,6 @@ function DailyHospitalizedAmountChart(props) {
     ])
     const sectionsOfChartSelect = [
         {
-            type: "checkbox",
-            title: "מצב מאושפזים",
-            options: [
-                { option: "miledSicks" },
-                { option: "sicks" },
-                { option: "seriouslySicks" }
-            ]
-        },
-        {
             title: "זמן",
             type: "radio",
             options: [
@@ -59,43 +45,53 @@ function DailyHospitalizedAmountChart(props) {
     ]
     return (
         <>
-            <ChartSelect state={props.state}
-                setState={props.setState}
-                sections={sectionsOfChartSelect} />
+            <ChartSelect state={props.state} setState={props.setState}
+                 sections={sectionsOfChartSelect}/>
             <div className="chart-container">
                 <ResponsiveContainer>
-                    <AreaChart data={dailyHospitalizedAmountChart.slice(dailyHospitalizedAmountChart.length - periodShow)}>
-                       {props.state.seriouslySicks&& <Area
+                    <LineChart data={verifiedChildrenTrendChart.slice(verifiedChildrenTrendChart.length-periodShow)}>
+                        <Line
                             type="monotone"
-                            stackId="1"
-                            dataKey={"seriouslySicks"}
-                            fill="#84dbfe"
-                            fillOpacity={1}
-                            stroke="#50cbfd"
-                            strokeWidth={3}
-                            activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
-                        />}
-                        {props.state.sicks&&<Area 
-                            type="monotone" 
-                            stackId="1"
-                            dataKey={"sicks"}
-                            fill="#bfcd78"
-                            fillOpacity={1}
+                            dataKey={"ages0To4"}
+                            strokeOpacity={1}
+                            strokeWidth={4}
+                            stroke="#baa1ef"
+                            fill="#baa1ef"
+                            dot={false}
+                            activeDot={{fill:"#baa1ef", stroke:"white", strokeWidth:0.7, r:6}}
+                        />
+                        <Line
+                            type="monotone"
+                            dataKey={"ages5To11"}
+                            strokeOpacity={1}
+                            strokeWidth={4}
                             stroke="#b6ca51"
-                            strokeWidth={3}
-                            activeDot={{fill:"#b6ca51",stroke:"white",strokeWidth:0.7,r:6}}
-                        />}
-                        {props.state.miledSicks&&<Area 
+                            fill="#b6ca51"
+                            dot={false}
+                            activeDot={{fill:"#b6ca51", stroke:"white", strokeWidth:0.7, r:6}}
+                        />
+                        <Line
                             type="monotone"
-                            stackId="1"
-                            dataKey={"miledSicks"}
-                            fill="#65a4a4"
-                            fillOpacity={1}
+                            dataKey={"ages12To15"}
+                            strokeOpacity={1}
+                            strokeWidth={4}
                             stroke="#237d7d"
-                            strokeWidth={3}
-                            activeDot={{fill:"#237d7d",stroke:"white", strokeWidth:0.7,r:6}}
-                         />}
+                            fill="#237d7d"
+                            dot={false}
+                            activeDot={{fill:"#237d7d", stroke:"white", strokeWidth:0.7, r:6}}
+                        />
+                        <Line
+                            type="monotone"
+                            dataKey={"ages16To19"}
+                            strokeOpacity={1}
+                            strokeWidth={4}
+                            stroke="#baa1ef"
+                            fill="#baa1ef"
+                            dot={false}
+                            activeDot={{fill:"#baa1ef", stroke:"white", strokeWidth:0.7, r:6}}
+                        />
                         <XAxis tickMargin={3} dataKey="date" style={{fontSize:12}}
+                            minTickGap={6}
                             tickFormatter={(date) => {
                                 let day = date.getDate()
                                 if (day < 10)
@@ -117,14 +113,14 @@ function DailyHospitalizedAmountChart(props) {
                             verticalAlign="top"
                             align="start"
                             height={35}
-                            formatter={value =>(<span className="chart-legend">{getTranslation(value)}</span>)}
+                            formatter={value =>(<span className="chart-legend">{value.slice(4).replace("To","-")}</span>)}
                         />
                         <CartesianGrid vertical={false} stroke="#e7e7e7"/>
                         <Tooltip shared={false} content={<MyToolTip />} />
-                    </AreaChart>
+                    </LineChart>
                 </ResponsiveContainer>
             </div>
         </>
     )
 }
-export default DailyHospitalizedAmountChart;
+export default VerifiedChildrenTrendChart;

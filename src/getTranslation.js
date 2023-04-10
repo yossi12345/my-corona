@@ -18,6 +18,14 @@ function getTranslation(englishWords){
             return "6 חודשים"
         case "threeMonths":
             return "3 חודשים"
+        case "ages0To4":
+            return "גילאי 0-4"
+        case "ages5To11":
+            return "גילאי 5-11"
+        case "ages12To15":
+            return "גילאי 12-15"
+        case "ages16To19":
+            return "גילאי 16-19"
         default: 
             return "noooo"
     }

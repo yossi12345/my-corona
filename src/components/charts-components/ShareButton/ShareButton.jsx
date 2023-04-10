@@ -5,7 +5,7 @@ import {BsArrowDownShort} from "react-icons/bs"
 function ShareButton(){
     const [shouldMenuOpen,setShouldMenuOpen]=useState(false)
     return (
-        <div onClick={()=>{
+        <div className="relative" onClick={()=>{
                 const shouldMenuOpenCopy=shouldMenuOpen
                 setShouldMenuOpen(!shouldMenuOpenCopy)
             }}>

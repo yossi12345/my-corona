@@ -13,7 +13,7 @@ function ChartSelect({sections=[],setState,state={},inputsRefs}){
         return initialValueOfChartOptions
     })
     return (
-        <div className="chart-select-container">
+        <div className="chart-select-container relative">
             <button className="chart-select-open-menu-btn" onClick={()=>{
                 const shouldSelectOpenCopy=shouldSelectOpen
                 setShouldSelectOpen(!shouldSelectOpenCopy)
