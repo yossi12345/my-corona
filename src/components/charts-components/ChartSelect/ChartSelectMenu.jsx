@@ -1,5 +1,5 @@
 import { useState } from "react"
-import getTranslation from "../../../getTranslation"
+//import getTranslation from "../../../getTranslation"
 function ChartSelectMenu(props){
     const [currentState,setCurrentState]=useState(()=>{
         const initialState=[]
@@ -35,7 +35,7 @@ function ChartSelectMenu(props){
                 {props.sections.map(({title, options, type }, sectionIndex) =>(
                     <div key={Math.random()}>
                         <h4>{title}</h4>
-                        {options.map(({ option }, optionIndex) => (
+                        {options.map(({option}, optionIndex) => (
                             <li key={currentState[sectionIndex][optionIndex].key}>
                                 {props.inputsRefs?
                                     <input type={type} value={option}
@@ -49,7 +49,7 @@ function ChartSelectMenu(props){
                                     />
                                 }
                                 <label>
-                                    {getTranslation(option)}
+                                    {props.translations[option]}
                                 </label>
                             </li>
                         )
@@ -60,16 +60,16 @@ function ChartSelectMenu(props){
             <button
                 onClick={() =>{
                     const newChartState = { ...props.state }
-                    const newChartOptions = []
+                    const newSelectedOptions = []
                     for (let i = 0; i < currentState.length; i++) {
                         for (let j = 0; j < currentState[i].length; j++) {
                             if (currentState[i][j].isChecked)
-                                newChartOptions.push(currentState[i][j].value)
+                                newSelectedOptions.push(currentState[i][j].value)
                             newChartState[currentState[i][j].value] = currentState[i][j].isChecked
                         }
                     }
                     props.setState(newChartState)
-                    props.setSelectedOptions(newChartOptions)
+                    props.setSelectedOptions(newSelectedOptions)
                     props.setShouldSelectOpen(false)
                 }}
             >

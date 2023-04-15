@@ -26,8 +26,22 @@ function getTranslation(englishWords){
             return "גילאי 12-15"
         case "ages16To19":
             return "גילאי 16-19"
+        case "men":
+            return "גברים"
+        case "women":
+            return "נשים"
+        case "verified":
+            return "מאומתים"
+        case "deceaseds":
+            return "נפטרים"
+        case "breathings":
+            return "מונשמים"
+        case "hospitalizeds":
+            return "מאושפזים"
+        case "seriousCondition":
+            return "מצב קשה"
         default: 
-            return "noooo"
+            return englishWords
     }
 }
 export default getTranslation

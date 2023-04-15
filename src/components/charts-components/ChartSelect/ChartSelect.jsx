@@ -1,8 +1,8 @@
-import {useState } from "react"
-import getTranslation from "../../../getTranslation"
+import { useState } from "react"
+//import getTranslation from "../../../getTranslation"
 import "./ChartSelect.scss"
 import ChartSelectMenu from "./ChartSelectMenu"
-function ChartSelect({sections=[],setState,state={},inputsRefs}){
+function ChartSelect({sections=[],setState,state={},translations,inputsRefs}){
     const [shouldSelectOpen,setShouldSelectOpen]=useState(false)
     const [selectedOptions,setSelectedOptions]=useState(()=>{
         const initialValueOfChartOptions=[]
@@ -18,12 +18,14 @@ function ChartSelect({sections=[],setState,state={},inputsRefs}){
                 const shouldSelectOpenCopy=shouldSelectOpen
                 setShouldSelectOpen(!shouldSelectOpenCopy)
             }}>
-                {selectedOptions.map((option,i)=>{
-                    const signAfterOption=(i+1)===selectedOptions.length?"":","
-                    return (
-                        <span key={Math.random()}>{getTranslation(option)+signAfterOption}</span>
-                        )
-                    })}
+                <div>
+                    {selectedOptions.map((option,i)=>{
+                        const signAfterOption=(i+1)===selectedOptions.length?"":", "
+                        return (
+                            <span key={Math.random()}>{translations[option]+signAfterOption}</span>
+                            )
+                        })}
+                </div>
                 <div className={"chart-select-arrow"+(shouldSelectOpen?" chart-select-arrow-rotate":"")}></div>
             </button>
             {shouldSelectOpen&&<ChartSelectMenu 
@@ -34,6 +36,7 @@ function ChartSelect({sections=[],setState,state={},inputsRefs}){
                 state={state}
                 setState={setState}
                 inputsRefs={inputsRefs}
+                translations={translations}
                 />}
         </div>
     )

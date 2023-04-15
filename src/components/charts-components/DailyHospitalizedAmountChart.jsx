@@ -12,8 +12,8 @@ import {
     Label,
 } from 'recharts';
 import { dailyHospitalizedAmountChart } from "../../mockData";
-import getTranslation from "../../getTranslation";
-import MyToolTip from "./MyToolTip/MyToolTip";
+//import getTranslation from "../../getTranslation";
+import GeneralToolTip from "./toolTip-components/GeneralToolTip";
 // import CustomDot from "./CustomDot";
 function DailyHospitalizedAmountChart(props) {
     const [periodShow, setPeriodShow] = useState(30)
@@ -40,7 +40,7 @@ function DailyHospitalizedAmountChart(props) {
             type: "checkbox",
             title: "מצב מאושפזים",
             options: [
-                { option: "miledSicks" },
+                { option: "miledSicks"},
                 { option: "sicks" },
                 { option: "seriouslySicks" }
             ]
@@ -49,17 +49,27 @@ function DailyHospitalizedAmountChart(props) {
             title: "זמן",
             type: "radio",
             options: [
-                { option: "untilNow" },
-                { option: "year" },
-                { option: "sixMonths" },
-                { option: "threeMonths" },
-                { option: "lastMonth" }
+                { option: "untilNow"},
+                { option: "year"},
+                { option: "sixMonths"},
+                { option: "threeMonths"},
+                { option: "lastMonth"}
             ]
         }
     ]
+    const translations={
+        untilNow:"עד עכשיו",
+        year:"שנה",
+        sixMonths:"6 חודשים",
+        threeMonths:"3 חודשים",
+        lastMonth:"חודש אחרון",
+        miledSicks:"קל",
+        sicks:"בינוני",
+        seriouslySicks:"קשה"
+    }
     return (
         <>
-            <ChartSelect state={props.state}
+            <ChartSelect state={props.state} translations={translations}
                 setState={props.setState}
                 sections={sectionsOfChartSelect} />
             <div className="chart-container">
@@ -96,15 +106,9 @@ function DailyHospitalizedAmountChart(props) {
                             activeDot={{fill:"#237d7d",stroke:"white", strokeWidth:0.7,r:6}}
                          />}
                         <XAxis tickMargin={3} dataKey="date" style={{fontSize:12}}
-                            tickFormatter={(date) => {
-                                let day = date.getDate()
-                                if (day < 10)
-                                    day = "0" + day
-                                let month = date.getMonth() + 1
-                                if (month < 10)
-                                    month = "0" + month
-                                return day + "." + month
-                            }}>
+                            tickFormatter={date=>(
+                                date.toLocaleDateString("en-GB",{day:"2-digit",month:"2-digit"}).replace("/",".")
+                            )}>
                             <Label position="insideBottom" offset={-3} style={{fontSize:14}}>תאריך</Label>
                         </XAxis>
                         <YAxis axisLine={false} tickLine={false} tickCount={6} tickMargin={20} style={{fontSize:12}}>
@@ -117,10 +121,11 @@ function DailyHospitalizedAmountChart(props) {
                             verticalAlign="top"
                             align="start"
                             height={35}
-                            formatter={value =>(<span className="chart-legend">{getTranslation(value)}</span>)}
+                            formatter={value =>(<span className="chart-legend">{translations[value]}</span>)}
                         />
                         <CartesianGrid vertical={false} stroke="#e7e7e7"/>
-                        <Tooltip shared={false} content={<MyToolTip />} />
+                        <Tooltip shared={false} content={<GeneralToolTip translations={translations}/>} wrapperStyle={{border:"none"}}
+                        />
                     </AreaChart>
                 </ResponsiveContainer>
             </div>

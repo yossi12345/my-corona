@@ -6,8 +6,7 @@ import {
 } from "recharts"
 import ChartSelect from "./ChartSelect/ChartSelect"
 import { verifiedChildrenTrendChart } from "../../mockData"
-import getTranslation from "../../getTranslation"
-import MyToolTip from "./MyToolTip/MyToolTip"
+import GeneralToolTip from "./toolTip-components/GeneralToolTip"
 import { useEffect,useState } from "react"
 
 function VerifiedChildrenTrendChart(props){
@@ -35,17 +34,28 @@ function VerifiedChildrenTrendChart(props){
             title: "זמן",
             type: "radio",
             options: [
-                { option: "untilNow" },
+                { option: "untilNow"},
                 { option: "year" },
-                { option: "sixMonths" },
+                { option: "sixMonths"},
                 { option: "threeMonths" },
-                { option: "lastMonth" }
+                { option: "lastMonth"}
             ]
         }
     ]
+    const translations={
+        untilNow:"עד עכשיו",
+        year:"שנה",
+        sixMonths:"6 חודשים",
+        threeMonths:"3 חודשים",
+        lastMonth:"חודש אחרון",
+        ages0To4:"גילאי 0-4",
+        ages5To11:"גילאי 5-11",
+        ages12To15:"גילאי 12-15",
+        ages16To19:"גילאי 16-19"
+    }
     return (
         <>
-            <ChartSelect state={props.state} setState={props.setState}
+            <ChartSelect state={props.state} setState={props.setState} translations={translations}
                  sections={sectionsOfChartSelect}/>
             <div className="chart-container">
                 <ResponsiveContainer>
@@ -55,10 +65,10 @@ function VerifiedChildrenTrendChart(props){
                             dataKey={"ages0To4"}
                             strokeOpacity={1}
                             strokeWidth={4}
-                            stroke="#baa1ef"
-                            fill="#baa1ef"
+                            stroke="#50cbfd"
+                            fill="#50cbfd"
                             dot={false}
-                            activeDot={{fill:"#baa1ef", stroke:"white", strokeWidth:0.7, r:6}}
+                            activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
                             type="monotone"
@@ -92,15 +102,9 @@ function VerifiedChildrenTrendChart(props){
                         />
                         <XAxis tickMargin={3} dataKey="date" style={{fontSize:12}}
                             minTickGap={6}
-                            tickFormatter={(date) => {
-                                let day = date.getDate()
-                                if (day < 10)
-                                    day = "0" + day
-                                let month = date.getMonth() + 1
-                                if (month < 10)
-                                    month = "0" + month
-                                return day + "." + month
-                            }}>
+                            tickFormatter={date=>(
+                                date.toLocaleDateString("en-GB",{day:"2-digit",month:"2-digit"}).replace("/",".")
+                            )}>
                             <Label position="insideBottom" offset={-3} style={{fontSize:14}}>תאריך</Label>
                         </XAxis>
                         <YAxis axisLine={false} tickLine={false} tickCount={6} tickMargin={20} style={{fontSize:12}}>
@@ -116,7 +120,7 @@ function VerifiedChildrenTrendChart(props){
                             formatter={value =>(<span className="chart-legend">{value.slice(4).replace("To","-")}</span>)}
                         />
                         <CartesianGrid vertical={false} stroke="#e7e7e7"/>
-                        <Tooltip shared={false} content={<MyToolTip />} />
+                        <Tooltip shared={false} content={<GeneralToolTip translations={translations}/>} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

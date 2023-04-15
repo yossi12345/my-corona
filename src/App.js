@@ -35,6 +35,7 @@ import map11 from "./card-images/map11.PNG"
 import exel from "./card-images/exel.PNG"
 import testTubes from "./card-images/test-tubes.PNG"
 import ImageCard from './components/card-components/ImageCard/ImageCard';
+import DifferentIndicatorsSegmentationChart from './components/charts-components/DifferentIndicatorsSegmentationChart';
 
 function App() {
   const [stateOfDailyHospitalizedAmountFirstChart,setStateOfDailyHospitalizedAmountFirstChart]=useState({ 
@@ -67,6 +68,18 @@ function App() {
         sixMonths:false
       }
     )
+  const [stateOfDifferentIndicatorsSegmentationChart,setStateOfDifferentIndicatorsSegmentationChart]=useState({
+        verified:true,
+        deceaseds:false,
+        breathings:false,
+        seriouslySicks:false,
+        hospitalizeds:false,
+        lastMonth:true,
+        untilNow:false,
+        year:false,
+        threeMonths:false,
+        sixMonths:false
+  })
   const lastDataUpdate=useMemo(()=>{
     return new Date()
   },[])
@@ -75,7 +88,7 @@ function App() {
   const navRef=useRef(null)
   const bodyRef=useRef(null)
   function handlePageLoad(){
-    window.scrollTo(0,0)
+    //window.scrollTo(0,0)
   }
   function updateNav(linkIndex){
     const newLinksClasses=["","","","","","","","","","","","",""]
@@ -92,8 +105,8 @@ function App() {
     const userPlace=bodyRef.current.scrollTop
     const headerHeightToConsider=200
     const userHaveMoreToScroll=(bodyRef.current.clientHeight+userPlace)<bodyRef.current.scrollHeight
-    const isLastChapterBiggerThanViewport=chaptersRefs.current[chaptersRefs.current.length-1].offsetHeight>window.innerHeight
-    if (!userHaveMoreToScroll&&!isLastChapterBiggerThanViewport)
+    const lastChapterBiggerThanViewport=chaptersRefs.current[chaptersRefs.current.length-1].offsetHeight>window.innerHeight
+    if (!userHaveMoreToScroll&&!lastChapterBiggerThanViewport)
         return chaptersRefs.current.length-1
     for (let i=0;i<chaptersRefs.current.length;i++){
       const chapterStartPlace=chaptersRefs.current[i].offsetTop-headerHeightToConsider
@@ -121,9 +134,8 @@ function App() {
  return (
     <div className='body-container' ref={bodyRef} onScroll={()=>{
       const userChapter=getChapterIndexUserIn()
-      if (userChapter!==-1){
+      if (userChapter!==-1)
         updateNav(userChapter)
-      }
     }}>
       <div className='header-and-menu-and-nav-container'>
         <Header setShouldMenuOpen={setShouldMenuOpen} 
@@ -255,7 +267,16 @@ function App() {
           <h3>תחקורים נוספים</h3>
           <div className='general-chapter-cards-container'>
             <div className='card'></div>
-            <div className='card'></div>
+            <div className='relative'>
+              <div className='card'>
+                <div className='chart-card-upper-part-container'>
+                  <TitleAndDescriptionOfCard title="פילוח מדדים שונים על פי גיל ומין" description={cardGenericDescription}/>
+                  <ShareButton/>
+                </div>
+                <DifferentIndicatorsSegmentationChart state={stateOfDifferentIndicatorsSegmentationChart}
+                setState={setStateOfDifferentIndicatorsSegmentationChart}/>
+              </div>
+            </div>
             <div className='card'></div>
             <ImageCard imgSrc={map6} title="מבודדים לפי רשות מקומית וגיל " 
               explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
@@ -286,7 +307,7 @@ function App() {
             <div className='card'></div>
             <div className='card'></div>
             <div className='table-card'></div>
-            <ImageCard imgSrc={map8} 
+            <ImageCard imgSrc={map7} 
               title="התחסנות לקורונה"
               explanation="נתוני אוכלוסיית מחוסנים בתוקף, לפי יישובים"
               link="experience.argics.com"
