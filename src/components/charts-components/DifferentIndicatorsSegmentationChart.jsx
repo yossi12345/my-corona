@@ -1,7 +1,7 @@
 import { useState,useEffect,useMemo } from "react"
 import { differentIndicatorsSegmentation } from "../../mockData"
 import ChartSelect from "./ChartSelect/ChartSelect"
-import { BarChart,ResponsiveContainer, XAxis, YAxis,Label,Bar,CartesianGrid,Tooltip,Legend, LabelList} from "recharts"
+import { BarChart,ResponsiveContainer, XAxis, YAxis,Label,Bar,CartesianGrid,Tooltip,Legend, LabelList, CartesianAxis} from "recharts"
 //import getTranslation from "../../getTranslation"
 import SegmentationTooltip from "./toolTip-components/SegmentationToolTip"
 function DifferentIndicatorsSegmentationChart(props){
@@ -156,6 +156,12 @@ function DifferentIndicatorsSegmentationChart(props){
         men:"גברים",
         women:"נשים"
     }
+    function Stupi(p){
+        console.log(p)
+        return (
+            <div style={{width:100, backgroundColor:"red",height:20}}></div>
+        )
+    }
     return (
         <>
             <ChartSelect sections={sectionsOfChartSelect} translations={translations}
@@ -164,29 +170,30 @@ function DifferentIndicatorsSegmentationChart(props){
             <div className="segmentation-chart-container">
                 <ResponsiveContainer>
                     <BarChart data={chartData.data} stackOffset="sign" layout="vertical">
-                        <Bar dataKey="men" fill="#50cbfd" stackId="stack" barSize={8} align="center">
-                            <LabelList style={{fontSize:11}} dataKey={"women"} position="right" offset={33}
-                                formatter={value=> (
+                        <Bar dataKey="men" fill="#50cbfd" stackId="stack" barSize={8} isAnimationActive={false}>
+                            <LabelList style={{fontSize:11}} dataKey="men" position="right" offset={33}
+                                formatter={value=>(
                                     Math.abs(value).toLocaleString("en-US",{maximumFractionDigits:1})+"%"
                                 )}/>
                         </Bar>
-                        <Bar dataKey="women" fill="#b6ca51" stackId="stack" align="center">
-                            <LabelList style={{fontSize:11}} dataKey={"women"} position="right" offset={33}
-                                formatter={value=> (
+                        <Bar dataKey="women" fill="#b6ca51" stackId="stack" isAnimationActive={false}>
+                            <LabelList style={{fontSize:11}} dataKey="women" position="right" offset={33}
+                                formatter={value=>(
                                     Math.abs(value).toLocaleString("en-US",{maximumFractionDigits:1})+"%"
                                 )}/>
                         </Bar>
                      
-                     
-                        <CartesianGrid/>
+                        <CartesianGrid strokeWidth={0.5} horizontalPoints={[28,46,66,87,108,129,149,170,189,210,230]}/>
                         <XAxis domain={[-30,30]} tickCount={7} axisLine={false} type="number" style={{fontSize:12}} tickFormatter={value=>(Math.abs(value)+"%")
                         }>
+                         
                             <Label style={{fontSize:15}} dy={14}>% סה"כ</Label>
                         </XAxis>
                         <YAxis type="category" dataKey="ageGroup" dx={-31} style={{fontSize:12}} interval={0} axisLine={false} tickLine={false}>
                             <Label position={"top"} style={{fontSize:14}} dy={-10} dx={25}>קבוצת גיל</Label>
                         </YAxis>
-                        <Tooltip content={<SegmentationTooltip translations={translations} total={chartData.total}/>} cursor={{fill:"#bcbcbc", height:1}}/>
+                        <Tooltip content={<SegmentationTooltip translations={translations} total={chartData.total}/>}
+                         cursor={{fill:"#bcbcbc", height:1}}/>
                         <Legend iconType="circle" verticalAlign="top" align="start" iconSize={8}
                            formatter={value =>(<span className="chart-legend">{translations[value]}</span>)}
                         />
