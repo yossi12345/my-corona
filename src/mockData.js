@@ -183,14 +183,14 @@ export const cardGenericDescription="Lorem ipsum dolor sit amet consectetur adip
 function pushNewDayToDailyDeceasedsVaccinatedCondition(arr,date){
     arr.push({
         above60:{
-            unvaccinated:Math.floor(Math,random()*60+1),
-            vaccinated:Math.floor(Math,random()*30+1),
-            expiredVaccinated:Math.floor(Math,random()*10+1),
+            unvaccinated:Math.floor(Math.random()*60+1),
+            vaccinated:Math.floor(Math.random()*30+1),
+            expiredVaccinated:Math.floor(Math.random()*10+1),
         },
         below60:{
-            unvaccinated:Math.floor(Math,random()*20+1),
-            vaccinated:Math.floor(Math,random()*10+1),
-            expiredVaccinated:Math.floor(Math,random()*5+1),
+            unvaccinated:Math.floor(Math.random()*20+1),
+            vaccinated:Math.floor(Math.random()*10+1),
+            expiredVaccinated:Math.floor(Math.random()*5+1),
         },
         date:date
     })

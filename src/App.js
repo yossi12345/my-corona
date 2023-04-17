@@ -36,6 +36,7 @@ import exel from "./card-images/exel.PNG"
 import testTubes from "./card-images/test-tubes.PNG"
 import ImageCard from './components/card-components/ImageCard/ImageCard';
 import DifferentIndicatorsSegmentationChart from './components/charts-components/DifferentIndicatorsSegmentationChart';
+import BedOccupancyTable from './components/charts-components/BedOccupancyTable';
 
 function App() {
   const [stateOfDailyHospitalizedAmountFirstChart,setStateOfDailyHospitalizedAmountFirstChart]=useState({ 
@@ -155,7 +156,7 @@ function App() {
             <div className='relative'>
               <div className='card'>
                 <div className='chart-card-upper-part-container'>
-                  <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
+                  <TitleAndDescriptionOfCard title='תפוסת מיטות בביה"ח' description={cardGenericDescription}/>
                   <ShareButton/>
                 </div>
                 <DailyHospitalizedAmountChart state={stateOfDailyHospitalizedAmountFirstChart}
@@ -170,7 +171,15 @@ function App() {
           <h3>מדדי תחלואה כללית</h3>
           <div className='general-chapter-cards-container'>
             <div className='card'></div>
-            <div className='card'></div>
+            <div className='relative'>
+              <div className='card'>
+                <div className='chart-card-upper-part-container'>
+                      <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
+                      <ShareButton/>
+                    </div>
+                  <BedOccupancyTable lastDataUpdate={lastDataUpdate}/>
+              </div>
+            </div>
           </div>
         </div>
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[3]=element} id="morbidity-and-children-hospitalizations">
