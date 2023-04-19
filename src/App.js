@@ -17,10 +17,10 @@ import GenericInfoCard from './components/card-components/GenericInfoCard';
 import TitleAndDescriptionOfCard from './components/card-components/TitleAndDescriptionOfCard/TitleAndDescriptionOfCard';
 import Menu from './components/Menu/Menu';
 import React, { useEffect, useRef, useState,useMemo } from 'react';
-import ShareButton from './components/charts-components/ShareButton/ShareButton';
+import ShareButton from './components/charts-and-tables-components/ShareButton/ShareButton';
 import OverViewChapter from './components/chapter-components/OverviewChapter/OverviewChapter';
-import DailyHospitalizedAmountChart from './components/charts-components/DailyHospitalizedAmountChart';
-import VerifiedChildrenTrendChart from './components/charts-components/VerifiedChildrenTrendChart';
+import DailyHospitalizedAmountChart from './components/charts-and-tables-components/DailyHospitalizedAmountChart';
+import VerifiedChildrenTrendChart from './components/charts-and-tables-components/VerifiedChildrenTrendChart';
 import map1 from "./card-images/map1.PNG"
 import map2 from "./card-images/map2.PNG"
 import map3 from "./card-images/map3.PNG"
@@ -35,8 +35,9 @@ import map11 from "./card-images/map11.PNG"
 import exel from "./card-images/exel.PNG"
 import testTubes from "./card-images/test-tubes.PNG"
 import ImageCard from './components/card-components/ImageCard/ImageCard';
-import DifferentIndicatorsSegmentationChart from './components/charts-components/DifferentIndicatorsSegmentationChart';
-import BedOccupancyTable from './components/charts-components/BedOccupancyTable';
+import DifferentIndicatorsSegmentationChart from './components/charts-and-tables-components/DifferentIndicatorsSegmentationChart';
+//import BedOccupancyTable from './components/charts-and-tables-components/BedOccupancyTable';
+import BedOccupancyTable2 from './components/charts-and-tables-components/BedOccupancyTable2/BedOccupancyTable2';
 
 function App() {
   const [stateOfDailyHospitalizedAmountFirstChart,setStateOfDailyHospitalizedAmountFirstChart]=useState({ 
@@ -155,7 +156,7 @@ function App() {
           <div className='general-chapter-cards-container'>
             <div className='relative'>
               <div className='card'>
-                <div className='chart-card-upper-part-container'>
+                <div className='card-upper-part-container'>
                   <TitleAndDescriptionOfCard title='תפוסת מיטות בביה"ח' description={cardGenericDescription}/>
                   <ShareButton/>
                 </div>
@@ -172,12 +173,12 @@ function App() {
           <div className='general-chapter-cards-container'>
             <div className='card'></div>
             <div className='relative'>
-              <div className='card'>
-                <div className='chart-card-upper-part-container'>
-                      <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
+              <div className='table-card'>
+                <div className='card-upper-part-container'>
+                      <TitleAndDescriptionOfCard title='תפוסת מיטות בביה"ח' description={cardGenericDescription}/>
                       <ShareButton/>
                     </div>
-                  <BedOccupancyTable lastDataUpdate={lastDataUpdate}/>
+                  <BedOccupancyTable2 lastDataUpdate={lastDataUpdate}/>
               </div>
             </div>
           </div>
@@ -187,7 +188,7 @@ function App() {
           <div className='general-chapter-cards-container'>
             <div className='relative'>
               <div className='card'>
-                <div className='chart-card-upper-part-container'>
+                <div className='card-upper-part-container'>
                     <TitleAndDescriptionOfCard title="מגמת ילדים מאומתים - ממוצע נע 7 ימים" description={cardGenericDescription}/>
                     <ShareButton/>
                 </div>
@@ -234,7 +235,7 @@ function App() {
           <div className='general-chapter-cards-container'>
           <div className='relative'>
               <div className='card'>
-                <div className='chart-card-upper-part-container'>
+                <div className='card-upper-part-container'>
                   <TitleAndDescriptionOfCard title="מספר מאושפזים -יומי" description={cardGenericDescription}/>
                   <ShareButton/>
                 </div>
@@ -278,7 +279,7 @@ function App() {
             <div className='card'></div>
             <div className='relative'>
               <div className='card'>
-                <div className='chart-card-upper-part-container'>
+                <div className='card-upper-part-container'>
                   <TitleAndDescriptionOfCard title="פילוח מדדים שונים על פי גיל ומין" description={cardGenericDescription}/>
                   <ShareButton/>
                 </div>

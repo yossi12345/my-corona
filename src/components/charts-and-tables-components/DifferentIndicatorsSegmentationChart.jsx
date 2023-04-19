@@ -1,6 +1,6 @@
 import { useState,useEffect,useMemo } from "react"
 import { differentIndicatorsSegmentation } from "../../mockData"
-import ChartSelect from "./ChartSelect/ChartSelect"
+import ChartSelect from "./select-componenets/ChartSelect/ChartSelect"
 import { BarChart,ResponsiveContainer, XAxis, YAxis,Label,Bar,CartesianGrid,Tooltip,Legend, LabelList, CartesianAxis} from "recharts"
 //import getTranslation from "../../getTranslation"
 import SegmentationTooltip from "./toolTip-components/SegmentationToolTip"

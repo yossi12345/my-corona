@@ -26,6 +26,7 @@
         @extend %basic-card;
         height: 184px;
         width:42vw;
+        padding: 10px;
         @media (min-width:screen-width.$lower) {
             width:46.32vw;
         }
@@ -43,6 +44,7 @@
         @extend %basic-card;
         height: 150px;
         width:42vw;//212.33
+        padding: 10px;
         @media (min-width:screen-width.$low){
             width: 45.322vw;
         }

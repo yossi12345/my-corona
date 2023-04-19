@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import ChartSelect from "./ChartSelect/ChartSelect";
+import ChartSelect from "./select-componenets/ChartSelect/ChartSelect";
 import {
     ResponsiveContainer,
     AreaChart,

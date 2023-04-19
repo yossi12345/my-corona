@@ -1,5 +1,5 @@
 import { useState } from "react"
-//import getTranslation from "../../../getTranslation"
+import "./ChartSelectMenu.scss"
 function ChartSelectMenu(props){
     const [currentState,setCurrentState]=useState(()=>{
         const initialState=[]

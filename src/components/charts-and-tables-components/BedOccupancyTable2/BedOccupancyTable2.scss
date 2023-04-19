@@ -1,0 +1,83 @@
+@use "src/variables-and-mixins/screen-width-limits.scss" as screen-width;
+.bed-occupancy-table{
+    width: 100%;
+    color: #222b45;
+    .first-row-container{
+        background-color: #e6f1f3;
+        display: flex;
+        height: 40px;
+        padding-right: 7px;
+        width: 100%;
+        .button-container{
+            height: 100%;
+            width: 33.33%;
+            button{
+                height: 100%;
+                color: #222b45;
+                font-size: 11px;
+                border-radius: 3px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                gap: 2px;
+                &:focus{
+                    outline:2px solid black;
+                }
+                @media (min-width:screen-width.$lower) {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .rest-rows-container-container{
+        direction: ltr;
+        overflow: auto;
+        font-weight: bold;
+        height:225px;
+        .row{
+            border-bottom: 1.5px solid #daeaee;
+            display: flex;
+        }
+        &::-webkit-scrollbar{
+            width:8px
+        }
+    }
+}
+.occupancy-bed-square,.hospital-square,.no-information-square{
+    display: flex;
+    align-items: center;
+    width: 32%;
+}
+.no-information-square{
+    font-size: 14px;
+}
+.occupancy-bed-square{
+    height: 50px;
+    font-size: 9px;
+    flex-direction: column;
+    justify-content: center;
+    gap:7px;
+    @media (min-width:screen-width.$lower) {
+        flex-direction: row;
+        font-size: 11px;
+        gap:3px;
+    }
+    @media (min-width:screen-width.$upper) {
+        font-size: 14px;
+    }
+}
+.hospital-square{
+    font-size: 11px;
+    padding-right:5px;
+    height: 50px;
+    @media (min-width:screen-width.$lower) {
+        font-size: 14px;
+    }
+}
+.triangle{
+    margin-top:2px;
+}
+.upside-down{
+    transform: rotate(180deg);
+}

@@ -1,0 +1,15 @@
+.select-arrow{
+    border:1.5px solid #8f9bb3;
+    width: 5px;
+    height: 5px;
+    margin-right:15px;
+    border-top: none;
+    border-right:none;
+    margin-bottom: 3px;
+    transform:rotate(-44deg); 
+    transition: transform 0.5s linear;
+}
+.select-arrow-rotate{
+    margin-bottom: -2px;
+    transform: rotate(135deg);
+}

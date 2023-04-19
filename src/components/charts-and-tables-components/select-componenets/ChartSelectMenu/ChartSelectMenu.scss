@@ -1,0 +1,36 @@
+.chart-select-menu{
+    font-size: 15px;
+    width: 198px;
+    position: absolute;
+    background-color: white;
+    border: 0.5px solid gray;
+    z-index:2;
+    border-radius: 8px;
+    ul{
+        height: 196px;
+        list-style:none;
+        overflow: auto;
+        margin: 0;
+        padding: 0 16px 10px;
+        &::-webkit-scrollbar{
+            width:5px;      
+        }
+        h4{
+            margin:11px 0;
+        }
+        li{
+            margin-bottom: 8px;
+        }
+    }
+    button{
+        height: 32px;
+        width: 50%;
+        //background-color: #e6f1f4;
+        border-bottom-right-radius:8px;
+        border-bottom-left-radius:8px;
+        border: none;
+        &:focus{
+            outline: 2px solid black;
+        }
+    }
+}

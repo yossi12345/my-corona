@@ -4,7 +4,7 @@ import {
     Label,XAxis,YAxis,
     CartesianGrid,Tooltip,Legend
 } from "recharts"
-import ChartSelect from "./ChartSelect/ChartSelect"
+import ChartSelect from "./select-componenets/ChartSelect/ChartSelect"
 import { verifiedChildrenTrendChart } from "../../mockData"
 import GeneralToolTip from "./toolTip-components/GeneralToolTip"
 import { useEffect,useState } from "react"
