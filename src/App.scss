@@ -193,6 +193,39 @@ body{
         padding: 10px;
     }
 }
+.table-select-open-menu-btn{
+    font-size: 15px;
+    border-radius: 20px;
+    padding: 6px 15px 6px;
+    background-color: #f7f9fc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width:200px;
+    margin-right: 10px;
+    border: 1px solid #e4e9f2;
+    &:focus{
+        outline: 2px solid black;
+    }
+}
+#card-of-traffic-light-table{
+    width: 95.629vw;
+    @media (min-width:screen-width.$tiny) {
+        width:82.67vw;
+    }
+    @media (min-width:screen-width.$lower) {
+        width: 95.1vw;
+    }
+    @media (min-width:screen-width.$low) {
+        width: 96.02vw;
+    }
+    @media (min-width:screen-width.$middle) {
+        width: 63.65vw;
+    }
+    @media (min-width:screen-width.$upper) {
+        width: 61.5vw;
+    }
+}
 .none{
     display: none;
 }

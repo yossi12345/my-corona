@@ -1,0 +1,201 @@
+@use "src/variables-and-mixins/screen-width-limits.scss" as screen-width;
+@use "src/variables-and-mixins/mixins.scss" as *;
+.traffic-light-table{
+    width: 100%;
+    color: #222b45;
+    .first-row-container{
+        background-color: #e6f1f3;
+        display: flex;
+        min-height: 54.6px;
+        padding-right: 7px;
+        width: 100%;
+        .button-container{
+            min-height: 54.6px;
+            width: 16.666%;
+            button{
+                height: 100%;
+                color: #222b45;
+                font-size: 11px;
+                border-radius: 3px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                gap: 2px;
+                &:focus{
+                    outline:2px solid black;
+                }
+                @media (min-width:screen-width.$lower) {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .rest-rows-container-container{
+        direction: ltr;
+        overflow: auto;
+        height:225px;
+        .row{
+            border-bottom: 1.5px solid #daeaee;
+            display: flex;
+            height: 40px;
+            align-items: center;
+        }
+        &::-webkit-scrollbar{
+            width:8px
+        }
+    }
+}
+.traffic-light-select-menu{
+    position: absolute;
+    height: 80px;
+    width: 200px;
+    border: 1.5px solid #e4e9f2;
+    border-radius: 6px;
+    right: 13px;
+    margin-top: 3px;
+    background-color: white;
+    input{
+        display: block;
+        margin:5px auto 6px;
+        height: 32px;
+        width: 190px;
+        &::placeholder{
+            font-size: 11px;
+        }
+    }
+    
+    ul{
+        list-style: none;
+        position: absolute;
+        width: 194px;
+        padding: 0;
+        z-index:2;
+        margin-top: -6px;
+        margin-right: 1.5px;
+        background-color: white;
+        li{
+            background-color: white;
+            border:1px solid #e6f1f4;
+            padding:6px;
+            &:hover{
+                //background-color: #8cbed6 ;
+                background-color: #d3a936d2 ;
+            }
+        }
+    }
+    button{
+        height: 32px;
+        width: 50%;
+        border: none;
+        background-color: #e6f1f4;
+        border-bottom-right-radius:8px;
+        border-bottom-left-radius:8px;
+        &:focus{
+            border:2px solid black;
+        }
+    }
+    .cancel-and-confirm-buttons-container{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+    }
+}
+.city-square,.grade-square,.generic-square{
+    width: 16.66%;
+}
+.city-square{
+    font-weight: bold;
+    font-size: 11px;
+    @media (min-width:screen-width.$lower) {
+        font-size: 14px;
+    }
+}
+.generic-square{
+    text-align: center;
+    font-size: 11px;
+    @media (min-width:screen-width.$lower) {
+        font-size: 14px;
+    }
+}
+.grade-square{
+    padding-right: 4%;
+    cursor: pointer;
+    .grade-container{
+        font-weight: bold;
+        text-decoration-line: underline;
+        color: #2c2c2c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 30px;
+        font-size: 9px;
+        @media (min-width:screen-width.$lower) {
+            width: 15.7px;
+            height: 20px;
+            font-size: 11px;
+        }
+        @media (min-width:screen-width.$upper) {
+            width: 28px;
+            height: 24px;
+            font-size: 14px;
+        }
+    }
+}
+.traffic-light-legend{//מתחת ל410 יורדים שורה
+    display: flex;
+    margin:0 16px 10px 0;
+    gap: 18px;
+    &>div{
+        display: flex;
+    }
+    .rectangle{
+        border-radius: 3px;
+        height: 22px;
+        width: 10px;
+        margin-left: 7px;
+        @media (min-width:screen-width.$low) {
+            width: 22px; 
+        }
+    }
+    .color{
+        color:#222b45;
+        font-size: 12.8px;
+        margin-top: -4px;
+    }
+    .range{
+        color: #757575;
+        font-size: 9.6px;
+        margin-top: -3px;
+    }
+}
+.grades-chart-card{
+    @extend %basic-card;
+    background-color: pink;
+    position: fixed;
+    top:50vh;
+    width: 322px;
+    height: 350px;
+    padding: 10px;
+    
+}
+.background-colorfa9e8f{
+    background-color: #fa9e8f;
+}
+.background-colorf2c580{
+    background-color: #f2c580;
+}
+.background-colorfcfc70{
+    background-color: #fcfc70;
+}
+.background-colorb8de92{
+    background-color: #b8de92;
+}
+.padding-right-10-percent{
+    padding-right: 10%;
+}
+.triangle-flip{
+    transform: rotate(180deg);
+}

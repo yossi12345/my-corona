@@ -160,7 +160,7 @@ export const bedOccupancyInHospitals={
     "שמואל הרופא":{general:3.9,internal:5},
     "שערי צדק":{general:87.4,internal:119.3}
 }
-const citiesParameters={
+export const citiesParameters={
     "אבני חפץ":{grade:4.5, newSicks:9.6,positiveTests:100,verifiedChangeRate:0,activeSicks:11},
     "נוף איילון":{grade:4.5, newSicks:9.6,positiveTests:100,verifiedChangeRate:0,activeSicks:2},
     "הושעיה":{grade:4.5, newSicks:9.6,positiveTests:100,verifiedChangeRate:0,activeSicks:2},

@@ -38,6 +38,7 @@ import ImageCard from './components/card-components/ImageCard/ImageCard';
 import DifferentIndicatorsSegmentationChart from './components/charts-and-tables-components/DifferentIndicatorsSegmentationChart';
 //import BedOccupancyTable from './components/charts-and-tables-components/BedOccupancyTable';
 import BedOccupancyTable2 from './components/charts-and-tables-components/BedOccupancyTable2/BedOccupancyTable2';
+import TrafficLightTable from './components/charts-and-tables-components/TrafficLightTable/TrafficLightTable';
 
 function App() {
   const [stateOfDailyHospitalizedAmountFirstChart,setStateOfDailyHospitalizedAmountFirstChart]=useState({ 
@@ -85,39 +86,10 @@ function App() {
   const lastDataUpdate=useMemo(()=>{
     return new Date()
   },[])
-  const linksRefs=useRef([])
-  const [linksClasses,setLinksClasses]=useState(["active","","","","","","","","","","","",""])
-  const navRef=useRef(null)
   const bodyRef=useRef(null)
   function handlePageLoad(){
     //window.scrollTo(0,0)
   }
-  function updateNav(linkIndex){
-    const newLinksClasses=["","","","","","","","","","","","",""]
-    const linkRect=linksRefs.current[linkIndex].getBoundingClientRect()
-    const navRect=navRef.current.getBoundingClientRect()
-    const scrollX=linkRect.left-navRect.left-(navRect.width-linkRect.width)/2
-    navRef.current.scroll({
-        left:navRef.current.scrollLeft+scrollX
-    })
-    newLinksClasses[linkIndex]="active"
-    setLinksClasses(newLinksClasses)
-  }
-  function getChapterIndexUserIn(){
-    const userPlace=bodyRef.current.scrollTop
-    const headerHeightToConsider=200
-    const userHaveMoreToScroll=(bodyRef.current.clientHeight+userPlace)<bodyRef.current.scrollHeight
-    const lastChapterBiggerThanViewport=chaptersRefs.current[chaptersRefs.current.length-1].offsetHeight>window.innerHeight
-    if (!userHaveMoreToScroll&&!lastChapterBiggerThanViewport)
-        return chaptersRefs.current.length-1
-    for (let i=0;i<chaptersRefs.current.length;i++){
-      const chapterStartPlace=chaptersRefs.current[i].offsetTop-headerHeightToConsider
-      const chapterEndPlace=chapterStartPlace+chaptersRefs.current[i].offsetHeight
-      if (userPlace>=chapterStartPlace&&userPlace<=chapterEndPlace)
-        return i
-    }
-    return -1
-  }
   const [shouldMenuOpen,setShouldMenuOpen]=useState(false)
   const chaptersRefs=useRef([]);
   const allChaptersRef=useRef(null) 
@@ -134,17 +106,15 @@ function App() {
       document.body.style.overflow=""
   },[shouldMenuOpen])
  return (
-    <div className='body-container' ref={bodyRef} onScroll={()=>{
-      const userChapter=getChapterIndexUserIn()
-      if (userChapter!==-1)
-        updateNav(userChapter)
-    }}>
+    <div className='body-container' ref={bodyRef}>
       <div className='header-and-menu-and-nav-container'>
         <Header setShouldMenuOpen={setShouldMenuOpen} 
                 shouldMenuOpen={shouldMenuOpen} lastDataUpdate={lastDataUpdate}/>
         {shouldMenuOpen&&<Menu setShouldMenuOpen={setShouldMenuOpen}
                                shouldMenuOpen={shouldMenuOpen}/>}
-        <Nav linksClasses={linksClasses} linksRefs={linksRefs} navRef={navRef}
+        <Nav
+          bodyRef={bodyRef}
+          chaptersRefs={chaptersRefs}
         />
       </div>
       <div className='all-chapters-container' ref={allChaptersRef}>
@@ -337,7 +307,15 @@ function App() {
         <div className='general-chapter-container' ref={(element)=>chaptersRefs.current[12]=element} id="cities-traffic-lights">
           <h3>רמזור יישובים</h3>
           <div className='general-chapter-cards-container'>
-            <div className='table-card'></div>
+            <div className='relative'>
+              <div className='table-card' id="card-of-traffic-light-table">
+                  <div className='card-upper-part-container'>
+                    <TitleAndDescriptionOfCard title="תוכנית הרמזור" description={cardGenericDescription}/>
+                    <ShareButton/>
+                  </div>
+                  <TrafficLightTable bodyRef={bodyRef} lastDataUpdate={lastDataUpdate}/>
+              </div>
+            </div>
             <div className='card'></div>
             <ImageCard imgSrc={map9} 
               title="מפת מדדי רמזור"
