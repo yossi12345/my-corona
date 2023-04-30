@@ -11,14 +11,14 @@ header{
     border-top:3px solid;
     border-image: linear-gradient(90deg,#4bb887,#16b6d0,#d6e58a)1;
     padding: 15px 0px 15px 5px;
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         padding:15px 32px 15px 0px;
     }
 }
 .logo{
     width: 220px;
     height: 43px;
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         width: 247px;
         height: 47px;
     }
@@ -26,25 +26,24 @@ header{
 .menu-button-and-logo-and-title-container{
     display: flex;
     flex-wrap: wrap;
-    @media (min-width:screen-width.$middle) {
-        flex-wrap: nowrap;
-    }
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         column-gap:20px;        
+    }
+    @media (min-width:screen-width.$w795) {
+        flex-wrap: nowrap;
     }
 }
 .header-title{
     font-weight: 700;
-    color:#222b45;
     white-space:nowrap;
     display: flex;
     margin-right: 16px;
     align-items: center;
-    @media (max-width:screen-width.$upper) {
+    @media (max-width:screen-width.$w980) {
         flex-wrap: wrap;
         padding-top: 11px; 
     }
-    @media (max-width:screen-width.$low){
+    @media (max-width:screen-width.$w690){
         width:290px;
         margin-right: 10px;
     }
@@ -56,7 +55,7 @@ header{
             height: 23px;
             margin:0 20px;
             width: 0;
-            @media (max-width:screen-width.$low) {
+            @media (max-width:screen-width.$w690) {
                 display: none;
             }
         }
@@ -64,7 +63,7 @@ header{
     & :last-child{
         font-size: 0.8rem;
         line-height: 0.9;
-        @media (max-width:980px) and (min-width:795px) {
+        @media (max-width:screen-width.$w980) and (min-width:screen-width.$w795) {
             padding-top: 20px;
         }
     }

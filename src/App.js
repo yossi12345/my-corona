@@ -39,6 +39,7 @@ import DifferentIndicatorsSegmentationChart from './components/charts-and-tables
 //import BedOccupancyTable from './components/charts-and-tables-components/BedOccupancyTable';
 import BedOccupancyTable2 from './components/charts-and-tables-components/BedOccupancyTable2/BedOccupancyTable2';
 import TrafficLightTable from './components/charts-and-tables-components/TrafficLightTable/TrafficLightTable';
+import VerifiedFromAbroadTable from './components/charts-and-tables-components/VerifiedFromAbroadTable/VerifiedFromAbroadTable';
 
 function App() {
   const [stateOfDailyHospitalizedAmountFirstChart,setStateOfDailyHospitalizedAmountFirstChart]=useState({ 
@@ -143,7 +144,7 @@ function App() {
           <div className='general-chapter-cards-container'>
             <div className='card'></div>
             <div className='relative'>
-              <div className='table-card'>
+              <div className='general-table-card'>
                 <div className='card-upper-part-container'>
                       <TitleAndDescriptionOfCard title='תפוסת מיטות בביה"ח' description={cardGenericDescription}/>
                       <ShareButton/>
@@ -177,7 +178,15 @@ function App() {
           <div className='general-chapter-cards-container'>
             <div className='card'></div>
             <div className='card'></div>
-            <div className='card'></div>
+            <div className='relative'>
+              <div className='general-table-card'>
+                <div className='card-upper-part-container'>
+                      <TitleAndDescriptionOfCard title="מאומתים הנכנסים לישראל לפי מדינות" description={cardGenericDescription}/>
+                      <ShareButton/>
+                </div>
+                <VerifiedFromAbroadTable lastDataUpdate={lastDataUpdate}/>
+              </div>
+            </div>
             <ImageCard imgSrc={map1} title="מבודדים לפי רשות מקומית וגיל " 
               explanation="תמונת מצב אודות נתוני בידודים פעילים, לפי רשות מקומית וגיל"
               link="experience.argics.com"
@@ -210,7 +219,8 @@ function App() {
                   <ShareButton/>
                 </div>
                 <DailyHospitalizedAmountChart state={stateOfDailyHospitalizedAmountSecondChart}
-                setState={setStateOfDailyHospitalizedAmountSecondChart}/>
+                  setState={setStateOfDailyHospitalizedAmountSecondChart}
+                />
               </div>
             </div>
             <div className='card'></div>
@@ -286,7 +296,7 @@ function App() {
             <div className='card'></div>
             <div className='card'></div>
             <div className='card'></div>
-            <div className='table-card'></div>
+            <div className='general-table-card'></div>
             <ImageCard imgSrc={map7} 
               title="התחסנות לקורונה"
               explanation="נתוני אוכלוסיית מחוסנים בתוקף, לפי יישובים"
@@ -308,7 +318,7 @@ function App() {
           <h3>רמזור יישובים</h3>
           <div className='general-chapter-cards-container'>
             <div className='relative'>
-              <div className='table-card' id="card-of-traffic-light-table">
+              <div className='traffic-light-table-card'>
                   <div className='card-upper-part-container'>
                     <TitleAndDescriptionOfCard title="תוכנית הרמזור" description={cardGenericDescription}/>
                     <ShareButton/>

@@ -27,13 +27,13 @@
         height: 184px;
         width:42vw;
         padding: 10px;
-        @media (min-width:screen-width.$lower) {
+        @media (min-width:screen-width.$w490) {
             width:46.32vw;
         }
-        @media (min-width:screen-width.$low) {
+        @media (min-width:screen-width.$w690) {
             width:48vw;
         }
-        @media (min-width:screen-width.$middle) {
+        @media (min-width:screen-width.$w795) {
             width:13.9vw;
         }
     }
@@ -45,10 +45,10 @@
         height: 150px;
         width:42vw;//212.33
         padding: 10px;
-        @media (min-width:screen-width.$low){
+        @media (min-width:screen-width.$w690){
             width: 45.322vw;
         }
-        @media (min-width:screen-width.$middle){
+        @media (min-width:screen-width.$w795){
             width: 20.788vw;
         }
     }

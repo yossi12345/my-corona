@@ -6,29 +6,25 @@ import TableSquareWithBar from "../TableSquareWithBar/TableSquareWithBar";
 import TableSelect from "../select-componenets/TableSelect/TableSelect";
 import "./BedOccupancyTable2.scss"
 function BedOccupancyTable2(props){
-    const [allHospitals,setAllHospitals] = useState(() => {
-        const result = Object.keys(bedOccupancyInHospitals)
-        result.sort((h1,h2)=>h2.localeCompare(h1,"he"))
-        return result
-    })
-    const [selectedHospitals, setSelectedHospitals] = useState([])
     const [tableState,setTableState]=useState({
         isReversedSort:true,
         sortBy:"generalOccupancy",
-        isTriangleShow:true
+        isTriangleShow:true,
+        allEntries:(Object.keys(bedOccupancyInHospitals)).sort((h1,h2)=>(
+            bedOccupancyInHospitals[h2].general-bedOccupancyInHospitals[h1].general
+        )),
+        selectedEntries:[]
     })
     function sortHandler(sortType){
         const toReverseSort=!tableState.isReversedSort||tableState.sortBy!==sortType
         const newTableState={...tableState}
-        const allHospitalsSorted=[...allHospitals]
-        const selectedHospitalsSorted=[...selectedHospitals]
         if (sortType==="alphabetic"){
-            allHospitalsSorted.sort((h1,h2)=>{
+            newTableState.allEntries.sort((h1,h2)=>{
                 if (toReverseSort)
                     return h1.localeCompare(h2,"he")
                 return h2.localeCompare(h1,"he")
             })
-            selectedHospitalsSorted.sort((h1,h2)=>{
+            newTableState.selectedEntries.sort((h1,h2)=>{
                 if (toReverseSort)
                     return h1.localeCompare(h2,"he")
                 return h2.localeCompare(h1,"he")
@@ -36,20 +32,18 @@ function BedOccupancyTable2(props){
         }
         else{
             const occupancyType=sortType==="internalOccupancy"?"internal":"general"
-            allHospitalsSorted.sort((h1,h2)=>{
+            newTableState.allEntries.sort((h1,h2)=>{
                 if (toReverseSort)
                     return bedOccupancyInHospitals[h2][occupancyType]-bedOccupancyInHospitals[h1][occupancyType]
                 return bedOccupancyInHospitals[h1][occupancyType]-bedOccupancyInHospitals[h2][occupancyType]
 
             })
-            selectedHospitalsSorted.sort((h1,h2)=>{
+            newTableState.selectedEntries.sort((h1,h2)=>{
                 if (toReverseSort)
                     return bedOccupancyInHospitals[h2][occupancyType]-bedOccupancyInHospitals[h1][occupancyType]
                 return bedOccupancyInHospitals[h1][occupancyType]-bedOccupancyInHospitals[h2][occupancyType]
             })
         }
-        setAllHospitals(allHospitalsSorted)
-        setSelectedHospitals(selectedHospitalsSorted)
         newTableState.isReversedSort=toReverseSort
         newTableState.isTriangleShow=true
         newTableState.sortBy=sortType
@@ -69,12 +63,16 @@ function BedOccupancyTable2(props){
     return (
         <>
             <TableSelect 
-                list={allHospitals} 
-                selectedEntries={selectedHospitals} 
-                setSelectedEntries={setSelectedHospitals}
+                tableState={tableState}
+                setTableState={setTableState}
+                subText="בתי חולים / מוסדות נבחרו"
+                inputPlaceholder="חיפוש בית חולים / מוסד"
+                openSelectButtonContent={
+                    (tableState.selectedEntries.length === 0 ?tableState.allEntries.length:tableState.selectedEntries.length) + " בתי חולים / מוסדות נבחרו"
+                }
             />
             <div className="data-update-container">
-                <BiInfoCircle size={12}/>
+                <BiInfoCircle size={14} className="margin-top1"/>
                 {
                     "הנתונים מעודכנים לתאריך "+
                     props.lastDataUpdate.toLocaleDateString("en-GB",{day:'2-digit',month:'2-digit',year: '2-digit'}).replace(/\//g,".")
@@ -88,7 +86,8 @@ function BedOccupancyTable2(props){
                         }}>
                             בית חולים
                             {tableState.isTriangleShow&&tableState.sortBy==="alphabetic"&&
-                                <GoTriangleUp size={12} color="#5ea5f5" className={"triangle"+(tableState.isReversedSort?" upside-down":"")}/>
+                               <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp size={12} className={"triangle"+(tableState.isReversedSort?" upside-down":"")}/>
                             }
                         </button>
                     </div>
@@ -98,7 +97,8 @@ function BedOccupancyTable2(props){
                         }}>
                             % תפוסה כללית
                             {tableState.isTriangleShow&&tableState.sortBy==="generalOccupancy"&&
-                                <GoTriangleUp size={12} color="#5ea5f5" className={"triangle"+(tableState.isReversedSort?" upside-down":"")}/>
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp size={12} color="#5ea5f5" className={"triangle"+(tableState.isReversedSort?" upside-down":"")}/>
                             }
                         </button>
                     </div>
@@ -108,34 +108,35 @@ function BedOccupancyTable2(props){
                         }}>
                             % תפוסת מחלקה פנימית
                             {tableState.isTriangleShow&&tableState.sortBy==="internalOccupancy"&&
-                                <GoTriangleUp size={12} color="#5ea5f5" className={"triangle"+(tableState.isReversedSort?" upside-down":"")}/>
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp size={12} color="#5ea5f5" className={"triangle"+(tableState.isReversedSort?" upside-down":"")}/>
                             }
                         </button>
                     </div>  
                 </div>
                 <div className="rest-rows-container-container">
                     <div>
-                        {(selectedHospitals.length>0?selectedHospitals:allHospitals).map((hospital)=>{
+                        {(tableState.selectedEntries.length>0?tableState.selectedEntries:tableState.allEntries).map((hospital)=>{
                             const generalBedOccupancy=bedOccupancyInHospitals[hospital].general
                             const internalBedOccupancy=bedOccupancyInHospitals[hospital].internal
                             return (
                                 <div key={Math.random()} className="row">
                                     <div className="hospital-square">{hospital}</div>
                                     <TableSquareWithBar
-                                        squareClass={generalBedOccupancy!==-1?"occupancy-bed-square":"no-information-square"}
+                                        squareClass={generalBedOccupancy!==-2?"occupancy-bed-square":"no-information-square"}
                                         fillColor={generalBedOccupancy<100?"#50cbfd":"#e95e7c"}
                                         unfillColor="#eff5f9"
                                         percentage={generalBedOccupancy}
-                                        informationWithoutBar="אין מידע"
+                                        contentWithoutBar="אין מידע"
                                         showBar={generalBedOccupancy!==-1}
                                         percentageClass={generalBedOccupancy!==-1?"":"no-information"}
                                     />
                                     <TableSquareWithBar 
-                                        squareClass={internalBedOccupancy!==-1?"occupancy-bed-square":"no-information-square"}
+                                        squareClass={internalBedOccupancy!==-2?"occupancy-bed-square":"no-information-square"}
                                         fillColor={internalBedOccupancy<100?"#50cbfd":"#e95e7c"}
                                         unfillColor="#eff5f9"
                                         percentage={internalBedOccupancy}
-                                        informationWithoutBar="אין מידע"
+                                        contentWithoutBar="אין מידע"
                                         showBar={internalBedOccupancy!==-1}
                                     />
                                 </div>

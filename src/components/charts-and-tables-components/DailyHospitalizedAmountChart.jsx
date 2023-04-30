@@ -14,6 +14,7 @@ import {
 import { dailyHospitalizedAmountChart } from "../../mockData";
 //import getTranslation from "../../getTranslation";
 import GeneralToolTip from "./toolTip-components/GeneralToolTip";
+import { Line } from "rechart";
 // import CustomDot from "./CustomDot";
 function DailyHospitalizedAmountChart(props) {
     const [periodShow, setPeriodShow] = useState(30)
@@ -76,36 +77,36 @@ function DailyHospitalizedAmountChart(props) {
                 <ResponsiveContainer>
                     <AreaChart data={dailyHospitalizedAmountChart.slice(dailyHospitalizedAmountChart.length - periodShow)}>
                        {props.state.seriouslySicks&& <Area
-                            type="monotone"
+                            type="linear"
                             stackId="1"
                             dataKey={"seriouslySicks"}
                             fill="#84dbfe"
                             fillOpacity={1}
                             stroke="#50cbfd"
-                            strokeWidth={3}
+                            strokeWidth={2}
                             activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
                         />}
                         {props.state.sicks&&<Area 
-                            type="monotone" 
+                            type="linear" 
                             stackId="1"
                             dataKey={"sicks"}
                             fill="#bfcd78"
                             fillOpacity={1}
                             stroke="#b6ca51"
-                            strokeWidth={3}
+                            strokeWidth={2}
                             activeDot={{fill:"#b6ca51",stroke:"white",strokeWidth:0.7,r:6}}
                         />}
                         {props.state.miledSicks&&<Area 
-                            type="monotone"
+                            type="linear"
                             stackId="1"
                             dataKey={"miledSicks"}
                             fill="#65a4a4"
                             fillOpacity={1}
                             stroke="#237d7d"
-                            strokeWidth={3}
+                            strokeWidth={2}
                             activeDot={{fill:"#237d7d",stroke:"white", strokeWidth:0.7,r:6}}
                          />}
-                        <XAxis tickMargin={3} dataKey="date" style={{fontSize:12}}
+                        <XAxis tickMargin={1} dataKey="date" style={{fontSize:12}} tickLine={{stroke:"#ebf1fa", strokeWidth:1.7}} tickSize={12}
                             tickFormatter={date=>(
                                 date.toLocaleDateString("en-GB",{day:"2-digit",month:"2-digit"}).replace("/",".")
                             )}>
@@ -123,7 +124,7 @@ function DailyHospitalizedAmountChart(props) {
                             height={35}
                             formatter={value =>(<span className="chart-legend">{translations[value]}</span>)}
                         />
-                        <CartesianGrid vertical={false} stroke="#e7e7e7"/>
+                        <CartesianGrid vertical={false}/>
                         <Tooltip shared={false} content={<GeneralToolTip translations={translations}/>} wrapperStyle={{border:"none"}}
                         />
                     </AreaChart>

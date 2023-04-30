@@ -6,13 +6,13 @@
     height:calc(100vh - 120.52px);
     position: absolute;
     box-shadow: 0 0 20px black;
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         height: calc(100vh - 114px);
     }
-    @media (min-width:screen-width.$middle) {
+    @media (min-width:screen-width.$w795) {
         height: calc(100vh - 98.52px);
     }
-    @media (min-width:screen-width.$upper) {
+    @media (min-width:screen-width.$w980) {
         height: calc(100vh - 80px);
     }
 }
@@ -31,7 +31,7 @@
     padding:4px 2px;
     background-color: white;
     width:100%;  
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         width:275px;
     }
 }

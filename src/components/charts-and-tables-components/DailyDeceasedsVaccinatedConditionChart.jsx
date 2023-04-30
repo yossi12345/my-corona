@@ -95,7 +95,7 @@ function DailyDeceasedsVaccinatedConditionChart(props){
                 <ResponsiveContainer>
                     <LineChart data={verifiedChildrenTrendChart.slice(verifiedChildrenTrendChart.length-periodShow)}>
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages0To4"}
                             strokeOpacity={1}
                             strokeWidth={4}
@@ -105,7 +105,7 @@ function DailyDeceasedsVaccinatedConditionChart(props){
                             activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages5To11"}
                             strokeOpacity={1}
                             strokeWidth={4}
@@ -115,7 +115,7 @@ function DailyDeceasedsVaccinatedConditionChart(props){
                             activeDot={{fill:"#b6ca51", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages12To15"}
                             strokeOpacity={1}
                             strokeWidth={4}
@@ -125,7 +125,7 @@ function DailyDeceasedsVaccinatedConditionChart(props){
                             activeDot={{fill:"#237d7d", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages16To19"}
                             strokeOpacity={1}
                             strokeWidth={4}

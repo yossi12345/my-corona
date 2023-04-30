@@ -2,19 +2,31 @@
 @use "src/variables-and-mixins/mixins.scss" as *;
 .traffic-light-table{
     width: 100%;
-    color: #222b45;
     .first-row-container{
         background-color: #e6f1f3;
         display: flex;
-        min-height: 54.6px;
+        height: min-content;
         padding-right: 7px;
         width: 100%;
         .button-container{
-            min-height: 54.6px;
-            width: 16.666%;
+            width: 16.0968%;
+            @media (min-width:screen-width.$w410) {
+                width: 16.0974%;
+            }
+            @media (min-width:screen-width.$w490) {
+                width: 16.7082%;
+            }
+            @media (min-width:screen-width.$w690) {
+                width: 16.7%;
+            }
+            @media (min-width:screen-width.$w795) {
+                width: 16.7096%;
+            }
+            @media (min-width:screen-width.$w980) {
+                width: 16.7036%;
+            }
             button{
                 height: 100%;
-                color: #222b45;
                 font-size: 11px;
                 border-radius: 3px;
                 border: none;
@@ -25,10 +37,46 @@
                 &:focus{
                     outline:2px solid black;
                 }
-                @media (min-width:screen-width.$lower) {
+                @media (min-width:screen-width.$w490) {
                     font-size: 14px;
                 }
             }
+        }
+        &>:first-child{
+            width: 19.516%;
+            @media (min-width:screen-width.$w410) {
+                width: 19.513%;
+            }
+            @media (min-width:screen-width.$w490) {
+                width: 16.459%;
+            }
+            @media (min-width:screen-width.$w690) {
+                width: 16.5%;
+            }
+            @media (min-width:screen-width.$w795) {
+                width: 16.452%;
+            }
+            @media (min-width:screen-width.$w980) {
+                width: 16.482%;
+            }
+        }
+    }
+    .city-square{
+        width: 19.516%;
+        @media (min-width:screen-width.$w410) {
+            width: 19.513%;
+        }
+        @media (min-width:screen-width.$w490) {
+            width: 16.459%;
+        }
+        @media (min-width:screen-width.$w690) {
+            width: 16.5%;
+        }
+        @media (min-width:screen-width.$w795) {
+            width: 16.452%;
+        }
+        @media (min-width:screen-width.$w980) {
+            width: 16.482%;
         }
     }
     .rest-rows-container-container{
@@ -43,6 +91,33 @@
         }
         &::-webkit-scrollbar{
             width:8px
+        }
+    }
+    .generic-square{
+        text-align: center;
+    }
+    .generic-square,.city-square{
+        font-size: 11px;
+        @media (min-width:screen-width.$w490) {
+            font-size: 14px;
+        }
+    }
+    .generic-square,.grade-square{
+        width: 16.0968%;
+        @media (min-width:screen-width.$w410) {
+            width: 16.0974%;
+        }
+        @media (min-width:screen-width.$w490) {
+            width: 16.7082%;
+        }
+        @media (min-width:screen-width.$w690) {
+            width: 16.7%;
+        }
+        @media (min-width:screen-width.$w795) {
+            width: 16.7096%;
+        }
+        @media (min-width:screen-width.$w980) {
+            width: 16.7036%;
         }
     }
 }
@@ -64,7 +139,6 @@
             font-size: 11px;
         }
     }
-    
     ul{
         list-style: none;
         position: absolute;
@@ -102,22 +176,8 @@
         width: 100%;
     }
 }
-.city-square,.grade-square,.generic-square{
-    width: 16.66%;
-}
 .city-square{
     font-weight: bold;
-    font-size: 11px;
-    @media (min-width:screen-width.$lower) {
-        font-size: 14px;
-    }
-}
-.generic-square{
-    text-align: center;
-    font-size: 11px;
-    @media (min-width:screen-width.$lower) {
-        font-size: 14px;
-    }
 }
 .grade-square{
     padding-right: 4%;
@@ -133,8 +193,8 @@
         height: 30px;
         font-size: 9px;
         @media (min-width:screen-width.$lower) {
-            width: 15.7px;
-            height: 20px;
+            width: fit-content;
+            height: 15.33px;
             font-size: 11px;
         }
         @media (min-width:screen-width.$upper) {
@@ -146,8 +206,11 @@
 }
 .traffic-light-legend{//מתחת ל410 יורדים שורה
     display: flex;
+    flex-wrap: wrap;
     margin:0 16px 10px 0;
-    gap: 18px;
+    width:calc(100% - 16px);
+    column-gap: 18px;
+    row-gap: 5px;
     &>div{
         display: flex;
     }
@@ -156,12 +219,11 @@
         height: 22px;
         width: 10px;
         margin-left: 7px;
-        @media (min-width:screen-width.$low) {
+        @media (min-width:screen-width.$w690) {
             width: 22px; 
         }
     }
     .color{
-        color:#222b45;
         font-size: 12.8px;
         margin-top: -4px;
     }
@@ -175,6 +237,7 @@
     @extend %basic-card;
     background-color: pink;
     position: fixed;
+    z-index: 50;
     top:50vh;
     width: 322px;
     height: 350px;
@@ -195,7 +258,4 @@
 }
 .padding-right-10-percent{
     padding-right: 10%;
-}
-.triangle-flip{
-    transform: rotate(180deg);
 }

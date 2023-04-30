@@ -160,6 +160,77 @@ export const bedOccupancyInHospitals={
     "שמואל הרופא":{general:3.9,internal:5},
     "שערי צדק":{general:87.4,internal:119.3}
 }
+export const countriesParameters={
+    "ירדן":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "אבני חפץ":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "נוף איילון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "הושעיה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "כפר האורנים":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "שלומי":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "תל מונד":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "מצפה רמון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    'בני עי"ש':{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "רמת ישי":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "כרמיאל":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "יבנה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "אבן יהודה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "בסמת טבעון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "ראשון לציון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "אילת":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "רחובות":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "תל אביב":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "עזה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "היישוב של יוסי האגדה והאיש":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "יוסי המשועמם":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "יוסי חולה על גלידות":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "קריית אתא":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "חינגל המשוגע":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "דה חינגל":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "צפת":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "חיפה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "אישימוטו":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "גזר":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "קלמנטינה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "תפוח":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "גני תקווה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "מגדל העמק":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "קרית שמונה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "ליאור הטבעוני":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "שמשון ויובב":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "גדרה":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "מודיעין-מכבים-רעות":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "הוד השרון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "רמת השרון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "יוסי השרון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "רמת גן":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "מעלות תרשיחא":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "מבשרת ציון":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "זאב השמאלני":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "אנשים אחים אנחנו":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "דאעש שוחר שלום":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "תוכנית הרמזור":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "גבעתיים":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "שפרעם":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "בית שאן":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "באר יעקב":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "בית יוסי":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "בית לחם":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "צור יצחק":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "צור האלוף":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "גל גדות":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "חורפיש":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "הולדג":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    'בסמ"ה':{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "בית גדן":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "צ'יפופו":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "קופיקו":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "אלמוני":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "???????":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "חצור הגלילית":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "שוהם":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    "ירושלים":{riskLevel:Math.floor(Math.random()*3+1),parameters:[]},
+    
+}
 export const citiesParameters={
     "אבני חפץ":{grade:4.5, newSicks:9.6,positiveTests:100,verifiedChangeRate:0,activeSicks:11},
     "נוף איילון":{grade:4.5, newSicks:9.6,positiveTests:100,verifiedChangeRate:0,activeSicks:2},
@@ -249,6 +320,7 @@ const startCoronaDate=new Date(2020,2,1)
 const today=new Date()
 let dayS=new Date(startCoronaDate.getFullYear(),startCoronaDate.getMonth(),startCoronaDate.getDate())
 dayS.setDate(dayS.getDate()-1)
+const countries=Object.keys(countriesParameters)
 do{
     dayS.setDate(dayS.getDate()+1)
     const dayCopy=new Date(dayS.getFullYear(),dayS.getMonth(),dayS.getDate())   
@@ -257,9 +329,21 @@ do{
     pushNewDayToDailyHospitalizedAmountChart(dailyHospitalizedAmountChart,dayCopy)
     pushNewDayToActiveSicks(activeSicksChart,dayCopy)
     pushNewDayToDailyDeceasedsVaccinatedCondition(dailyDeceasedsVaccinatedConditionChart,dayCopy)
+    countries.forEach((country)=>{
+        pushNewDayToCountryParameters(countriesParameters[country].parameters,dayCopy)
+    })
 }while(dayS.toDateString()!==today.toDateString())
 export const cardGenericDescription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quos, quas obcaecati porro earum, aperiam minus rerum voluptates ea illum, nulla velit consectetur! Nihil repellat inventore sapiente nemo iste excepturi."
-        
+function pushNewDayToCountryParameters(arr,date){
+    const enteringAmount=Math.floor(Math.random()*500+1)
+    arr.push({
+        enteringAmount:enteringAmount,
+        verifiedCitizens:Math.floor(Math.random()*3000),
+        verifiedForeign:Math.floor(Math.random()*100),
+        verifiedFromEntering:Math.floor(Math.random()*(enteringAmount+1)),
+        date:date
+    })
+}        
 function pushNewDayToDailyDeceasedsVaccinatedCondition(arr,date){
     arr.push({
         above60:{

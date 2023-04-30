@@ -14,7 +14,7 @@ $smaller-font:12px;
 }
 .smaller-size-number,.small-size-number,
 .medium-size-number,.large-size-number{
-    @extend %number;
+    font-weight: 700;
     direction: ltr;
     margin:0 3px 5px;
 }
@@ -31,7 +31,7 @@ $smaller-font:12px;
     }
     .number{
         font-size:$small-font;
-        @extend %number;
+        font-weight: 700;
         margin: 0 5px;
     }
     .words{
@@ -69,10 +69,10 @@ $smaller-font:12px;
         margin-left:19px;
     }
    .number{
-        @extend %number;
+        font-weight: 700;
         font-size: 14.4px;
         margin-bottom: 8px;
-        @media (min-width:screen-width.$upper) {
+        @media (min-width:screen-width.$w980) {
             font-size: 17.6px;
             margin-bottom: 6px;
         }

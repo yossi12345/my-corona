@@ -1,19 +1,13 @@
 @use "src/variables-and-mixins/screen-width-limits.scss" as screen-width;
 @use "src/variables-and-mixins/mixins.scss" as *;
 @import 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap';
-// $upper:980px;
-// $middle:795px;
-// $low:690px;
-// $lower:490px;
-//$tiny:410px;
 *{
     box-sizing: border-box;
     direction: rtl;
     font-family: "Open Sans";
+    color:#222b45;
 }
 html{
-    // scroll-behavior: smooth;
-    // scroll-padding-top: 184px;
     overflow: hidden;
 }
 body{
@@ -21,7 +15,7 @@ body{
 }
 ::-webkit-scrollbar{
     height: 6px;
-    width: 10px;
+    width: 8px;
 }
 ::-webkit-scrollbar-truck{
     background-color: transparent;
@@ -35,59 +29,47 @@ body{
     position: sticky;
     top:-125px;
     z-index: 3;
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         position: fixed;
         top:0;
     }
 }
 .body-container{
     height: 100vh;
-    overflow-y:overlay;
     overflow-x: hidden;
+    overflow: overlay;
     background-color:#E9EDF3;
-    //scroll-behavior: smooth;
     scroll-padding-top: 60px;
-    @media (min-width:screen-width.$lower){
+    @media (min-width:screen-width.$w490){
         scroll-padding-top: 184px;
     }
-    @media (min-width:screen-width.$low){
+    @media (min-width:screen-width.$w690){
         scroll-padding-top: 174px;
     }
-    @media (min-width:screen-width.$middle){
+    @media (min-width:screen-width.$w795){
         scroll-padding-top: 158px;
     }
-    @media (min-width:screen-width.$upper){
+    @media (min-width:screen-width.$w980){
         scroll-padding-top: 140px;
     }
-
 }
 .all-chapters-container{
-    padding:0 16px 36px;
-    //margin-top: 4px;
-    // display: flex; 
-    // align-items: center;
-    // flex-direction: column;
-    // height: 100%;
-    // overflow: auto;
-    @media (min-width:screen-width.$lower){
-        //margin-top: 188.5px;
-    }
-    @media (min-width:screen-width.$low){
-       // margin-top: 178px;
-    }
-    @media (min-width:screen-width.$middle){
-        //margin-top: 162.5px;
-    }
-    @media (min-width:screen-width.$upper){
+    padding: 0 9.6px 36px;
+    @media (min-width:screen-width.$w410){
         padding: 0 36px 36px;
-        //margin-top: 144px;
+    }
+    @media (min-width:screen-width.$w490){
+        padding: 0 16px 36px;
+    }
+    @media (min-width:screen-width.$w980){
+        padding: 0 36px 36px;
     }
 }
 .total-number{
     @extend %number;
-    font-size:16px;//22.4
+    font-size:16px;
     margin-bottom: 4px;
-    @media (min-width:screen-width.$lower) {
+    @media (min-width:screen-width.$w490) {
         font-size: 22.4px;
     }
 }
@@ -95,16 +77,16 @@ body{
     border-bottom: 1px solid gray;
     padding-bottom: 30px;
     padding-top: 4px;
-    @media (min-width:screen-width.$lower){
+    @media (min-width:screen-width.$w490){
         padding-top: 188.5px;
     }
-    @media (min-width:screen-width.$low){
+    @media (min-width:screen-width.$w690){
        padding-top: 178px;
     }
-    @media (min-width:screen-width.$middle){
+    @media (min-width:screen-width.$w795){
         padding-top: 162.5px;
     }
-    @media (min-width:screen-width.$upper){
+    @media (min-width:screen-width.$w980){
         padding-top: 144px;
     }
 }
@@ -119,55 +101,71 @@ body{
     display: flex;
     flex-wrap: wrap;
     gap:20.8px;
-    @media (min-width:screen-width.$middle){
+    @media (min-width:screen-width.$w795){
         gap:10px;
-    }
-    .table-card{
-        @extend %basic-card;
-        width: 96vw;
-        height: 350px;
-        @media (min-width:screen-width.$tiny){
-            width: 81.8vw;
-        }
-        @media (min-width:screen-width.$lower){
-            width: 92.5vw;
-        }
-        @media (min-width:screen-width.$low){
-            width: 96.15vw;
-        }
-        @media (min-width:screen-width.$middle){
-            width: 30.45vw;
-        }
-        @media (min-width:screen-width.$upper){
-            width: 29.5vw;
-        }
     }
     .card{
         @extend %basic-card;
         padding: 10px;
         height: 350px;
         width: 93vw;
-        @media (min-width:screen-width.$tiny) and (max-width:screen-width.$lower){
+        @media (min-width:screen-width.$w410) and (max-width:screen-width.$w490){
             width: 81vw;
         }
-        @media (min-width:screen-width.$middle){
+        @media (min-width:screen-width.$w795){
             width: 30vw;
+
         }
     }  
 }
+.general-table-card,.traffic-light-table-card{
+    @extend %basic-card;
+    height: 350px;
+    width: 95.886vw;
+    .card-upper-part-container{
+        padding: 10px;
+    }
+    @media (min-width:screen-width.$w410){
+        width: 82.439vw;
+    }
+    @media (min-width:screen-width.$w490){
+        width: 95.14vw;
+    }
+    @media (min-width:screen-width.$w690){
+        width: 96.0833vw;
+    }
+    @media (min-width:screen-width.$w795){
+        width: 30.652vw;
+    }
+    @media (min-width:screen-width.$w980){
+        width: 29.8145vw;
+    }
+}
+.traffic-light-table-card{
+    @media (min-width:screen-width.$w795){
+        width: 63.647vw;
+    }
+    @media (min-width:screen-width.$w980){
+        width: 61.571vw;
+    }
+}
 .data-update-container{
     font-size: 11.2px;
-    color:#222b45;
     background-color: #e6f1f3;
     padding:4px;
     margin: 8px 10px 8px 0;
-    width: 193.62px;
+    width: fit-content;
     display: flex;
-    align-items: center;
-    gap:5px;
+    font-weight: 400;
+    max-width: calc(100% - 20px);
+    gap:8px;
+    line-height: 1.3em;
 }
 .margin-bottom16{
     margin-bottom:16px;
+}
+.margin-top1{
+    margin-top: 1px;
 }
 .chart-container{
     width:100%;
@@ -188,11 +186,6 @@ body{
     justify-content: space-between;
     width: 100%;
 }
-.table-card{
-    .card-upper-part-container{
-        padding: 10px;
-    }
-}
 .table-select-open-menu-btn{
     font-size: 15px;
     border-radius: 20px;
@@ -208,23 +201,30 @@ body{
         outline: 2px solid black;
     }
 }
-#card-of-traffic-light-table{
-    width: 95.629vw;
-    @media (min-width:screen-width.$tiny) {
-        width:82.67vw;
-    }
-    @media (min-width:screen-width.$lower) {
-        width: 95.1vw;
-    }
-    @media (min-width:screen-width.$low) {
-        width: 96.02vw;
-    }
-    @media (min-width:screen-width.$middle) {
-        width: 63.65vw;
-    }
-    @media (min-width:screen-width.$upper) {
-        width: 61.5vw;
-    }
+.triangle2{
+    width: 0;
+    height: 0;
+    border-left: 4.5px solid transparent;
+    border-right: 4.5px solid transparent;
+    border-bottom: 4.5px solid #308bf6;
+}
+.upside-down{
+    transform: rotate(180deg);
+}
+.select-arrow{
+    border:1.5px solid #8f9bb3;
+    width: 5px;
+    height: 5px;
+    margin-right:15px;
+    border-top: none;
+    border-right:none;
+    margin-bottom: 3px;
+    transform:rotate(-44deg); 
+    transition: transform 0.5s linear;
+}
+.select-arrow-rotate{
+    margin-bottom: -2px;
+    transform: rotate(135deg);
 }
 .none{
     display: none;

@@ -15,10 +15,10 @@
             bottom:3px;
         }
     }
-    @media (min-width:screen-width.$tiny) and (max-width:screen-width.$lower){
+    @media (min-width:screen-width.$w410) and (max-width:screen-width.$w490){
         width: 81vw;
     }
-    @media (min-width:screen-width.$middle){
+    @media (min-width:screen-width.$w795){
         width: 30vw;
     }
 }
@@ -26,7 +26,6 @@
     font-weight: 700;
     font-size: 1rem;
     margin:3px 0 5px;
-    color: #222b45;
 }
 .image-card-explanation-and-link-container{
     display: flex;

@@ -43,7 +43,7 @@ function Header(props){
                     </div>
                 </div>
             </div>
-            <div className="change-buttons-container">
+            <div className="relative">
                 <ChangeLanguageButton/>
                 <ChangeDarknessButton/>
             </div>

@@ -184,7 +184,7 @@ function DifferentIndicatorsSegmentationChart(props){
                         </Bar>
                      
                         <CartesianGrid strokeWidth={0.5} horizontalPoints={[28,46,66,87,108,129,149,170,189,210,230]}/>
-                        <XAxis domain={[-30,30]} tickCount={7} axisLine={false} type="number" style={{fontSize:12}} tickFormatter={value=>(Math.abs(value)+"%")
+                        <XAxis domain={[-30,30]} tickLine={{stroke:"#ebf1fa",strokeWidth:1}} tickSize={4} tickCount={7} axisLine={false} type="number" style={{fontSize:12}} tickFormatter={value=>(Math.abs(value)+"%")
                         }>
                          
                             <Label style={{fontSize:15}} dy={14}>% סה"כ</Label>

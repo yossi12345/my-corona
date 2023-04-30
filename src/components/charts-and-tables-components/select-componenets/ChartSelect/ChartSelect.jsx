@@ -1,7 +1,7 @@
 import { useState } from "react"
 //import getTranslation from "../../../getTranslation"
 import "./ChartSelect.scss"
-import SelectArrow from "../SelectArrow/SelectArrow"
+//import SelectArrow from "../SelectArrow/SelectArrow"
 import ChartSelectMenu from "../ChartSelectMenu/ChartSelectMenu"
 function ChartSelect({sections=[],setState,state={},translations,inputsRefs}){
     const [shouldSelectOpen,setShouldSelectOpen]=useState(false)
@@ -27,8 +27,7 @@ function ChartSelect({sections=[],setState,state={},translations,inputsRefs}){
                             )
                         })}
                 </div>
-                <SelectArrow isUpsideDown={!shouldSelectOpen}/>
-                {/* <div className={"chart-select-arrow"+(shouldSelectOpen?" chart-select-arrow-rotate":"")}></div> */}
+                <div className={"select-arrow"+(shouldSelectOpen?" select-arrow-rotate":"")}></div>
             </button>
             {shouldSelectOpen&&<ChartSelectMenu 
                 setShouldSelectOpen={setShouldSelectOpen}

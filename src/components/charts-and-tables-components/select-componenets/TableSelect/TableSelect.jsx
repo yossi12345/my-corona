@@ -1,5 +1,5 @@
 import { useState } from "react"
-import SelectArrow from "../SelectArrow/SelectArrow"
+//import SelectArrow from "../SelectArrow/SelectArrow"
 import "./TableSelect.scss"
 function TableSelect(props) {
     const [shouldSelectOpen, setShouldSelectOpen] = useState(false)
@@ -8,20 +8,20 @@ function TableSelect(props) {
     const [isUserSearching,setIsUserSearching]=useState(false)
     const [currentState,setCurrentState]=useState(()=>{
         const result={}
-        for (const entry in props.list)
+        for (const entry in props.tableState.allEntries)
             result[entry]=false;
         return result
     })
     function cancelUserSelections() {
         const newCurrentState = { ...currentState }
-        const newTempSelectedHospitals = []
+        const newTempSelectedEntries = []
         for (const entry in currentState) {
-            const isEntrySelected = props.selectedEntries.includes(entry)
+            const isEntrySelected = props.tableState.selectedEntries.includes(entry)
             newCurrentState[entry] = isEntrySelected
             if (isEntrySelected)
-                newTempSelectedHospitals.push(entry)
+                newTempSelectedEntries.push(entry)
         }
-        setTempSelectedEntries(newTempSelectedHospitals)
+        setTempSelectedEntries(newTempSelectedEntries)
         setCurrentState(newCurrentState)
     }
     function changeCheckbox(entry){
@@ -32,7 +32,7 @@ function TableSelect(props) {
     function searchHandler(searchLine) {
         const newSearchedEntries=[]
         const currentStateCopy = { ...currentState}
-        props.list.forEach((entry)=>{
+        props.tableState.allEntries.forEach((entry)=>{
             if (tempSelectedEntries.includes(entry))
                 currentStateCopy[entry] = true
             else if (entry.includes(searchLine))
@@ -42,7 +42,7 @@ function TableSelect(props) {
         setSearchedEntries(newSearchedEntries)
     }
     return (
-        <div className="table-select-container relative">
+        <div className="table-select-container">
             <button className="table-select-open-menu-btn" onClick={() => {
                 const shouldSelectOpenCopy = shouldSelectOpen
                 if (shouldSelectOpenCopy){
@@ -52,12 +52,12 @@ function TableSelect(props) {
                 setShouldSelectOpen(!shouldSelectOpenCopy)
             }}>
                 <div>
-                    {(props.selectedEntries.length === 0 ? props.list.length : props.selectedEntries.length) + " בתי חולים / מוסדות נבחרו"}
+                    {props.openSelectButtonContent}
                 </div>
-                <SelectArrow isUpsideDown={shouldSelectOpen}/>
+                <div className={"select-arrow"+(shouldSelectOpen?" select-arrow-rotate":"")}></div>
             </button>
             {shouldSelectOpen && <div className="table-select-menu">
-                <input placeholder="חיפוש בית חולים / מוסד"
+                <input placeholder={props.inputPlaceholder} className="search-input"
                     onFocus={(event)=>{
                         setIsUserSearching(true)
                         searchHandler(event.target.value)
@@ -66,11 +66,11 @@ function TableSelect(props) {
                         setIsUserSearching(true)
                         searchHandler(event.target.value)
                     }}
-                    className="search-input"
                 />
                 {!isUserSearching && tempSelectedEntries.length > 0 && <div>
-                    {tempSelectedEntries.length + " בתי חולים / מוסדות נבחרו"}
+                    {tempSelectedEntries.length +" "+props.subText}
                 </div>}
+                {!isUserSearching&&props.sectionComponent?props.sectionComponent:null}
                 {isUserSearching&&<ul>
                     {tempSelectedEntries.length>0&&<div className="selected-entries">
                         {tempSelectedEntries.map((entry) =>(
@@ -104,8 +104,9 @@ function TableSelect(props) {
                 <div className="cancel-and-confirm-buttons-container">
                     <button onClick={() => {
                         if (!isUserSearching) {
-                            console.log("WWW")
-                            props.setSelectedEntries([...tempSelectedEntries])
+                            const newTableState={...props.tableState}
+                            newTableState.selectedEntries=[...tempSelectedEntries]
+                            props.setTableState(newTableState)
                             setShouldSelectOpen(false)
                             return
                         }
@@ -118,10 +119,16 @@ function TableSelect(props) {
                         setTempSelectedEntries(newTempSelectedEntries)
                     }}>אישור</button>
                     <button onClick={() => {
-                        if (!isUserSearching)
-                            setShouldSelectOpen(false)
-                        setIsUserSearching(false)
+
                         cancelUserSelections()
+                        if (isUserSearching){
+                            setIsUserSearching(false) 
+                            return
+                        }
+                        setShouldSelectOpen(false)
+                        if (props.cancelUserSelectionInSectionComponent)
+                            props.cancelUserSelectionInSectionComponent()
+                        
                     }}>ביטול</button>
                 </div>
             </div>}

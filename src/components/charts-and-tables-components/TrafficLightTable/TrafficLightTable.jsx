@@ -1,8 +1,8 @@
 import { BiInfoCircle } from "react-icons/bi"
-import {GoTriangleUp} from "react-icons/go"
+//import {GoTriangleUp} from "react-icons/go"
 import { citiesParameters } from "../../../mockData";
 import TrafficLightRow from "./TrafficLightRow";
-import SelectArrow from "../select-componenets/SelectArrow/SelectArrow";
+//import SelectArrow from "../select-componenets/SelectArrow/SelectArrow";
 import "./TrafficLightTable.scss"
 import { useState,useRef} from "react";
 function TrafficLightTable(props) {
@@ -72,7 +72,7 @@ function TrafficLightTable(props) {
                 setShouldSelectOpen(!shouldSelectOpenCopy)
             }}>
                 {selectedCity===null?"כלל היישובים":selectedCity}
-                <SelectArrow isUpsideDown={shouldSelectOpen}/>
+                <div className={"select-arrow"+(shouldSelectOpen?" select-arrow-rotate":"")}></div>
             </button>
             {shouldSelectOpen&&<div className="traffic-light-select-menu">
                     <input 
@@ -111,7 +111,7 @@ function TrafficLightTable(props) {
                 </div>
             }
             <div className="data-update-container">
-                <BiInfoCircle size={12} />
+                <BiInfoCircle size={14} className="margin-top1"/>
                 {"הנתונים נכונים לתאריך " + props.lastDataUpdate.toLocaleDateString("en-GB", { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, ".")}
             </div>
             <div className="traffic-light-legend">
@@ -150,7 +150,8 @@ function TrafficLightTable(props) {
                         <button onClick={() => { handleSortButtonClick("alphabetic") }}>
                             ישוב
                             {tableState.isTriangleShow && tableState.sortBy === "alphabetic" &&
-                                <GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " triangle-flip" : "")} />
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " upside-down" : "")} />
                             }
                         </button>
                     </div>
@@ -158,7 +159,8 @@ function TrafficLightTable(props) {
                         <button onClick={() => { handleSortButtonClick("grade") }}>
                             ציון וצבע יומי
                             {tableState.isTriangleShow && tableState.sortBy === "grade" &&
-                                <GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " triangle-flip" : "")} />
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " upside-down" : "")} />
                             }
                         </button>
                     </div>
@@ -166,7 +168,8 @@ function TrafficLightTable(props) {
                         <button onClick={() => { handleSortButtonClick("newSicks") }}>
                            חולים חדשים לכל 10,000 נפש *
                             {tableState.isTriangleShow && tableState.sortBy === "newSicks" &&
-                                <GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " triangle-flip" : "")} />
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " upside-down" : "")} />
                             }
                         </button>
                     </div>
@@ -174,7 +177,8 @@ function TrafficLightTable(props) {
                         <button onClick={() => { handleSortButtonClick("positiveTests") }}>
                            % הבדיקות החיוביות *
                             {tableState.isTriangleShow && tableState.sortBy === "positiveTests" &&
-                                <GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " triangle-flip" : "")} />
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " upside-down" : "")} />
                             }
                         </button>
                     </div>
@@ -182,7 +186,9 @@ function TrafficLightTable(props) {
                         <button onClick={() => { handleSortButtonClick("verifiedChangeRate") }}>
                            שיעור שינוי מאומתים *
                             {tableState.isTriangleShow && tableState.sortBy === "verifiedChangeRate" &&
-                                <GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " triangle-flip" : "")} />
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+
+                                //<GoTriangleUp color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ?" upside-down" : "")} />
                             }
                         </button>
                     </div>
@@ -190,7 +196,8 @@ function TrafficLightTable(props) {
                         <button className="padding-right-10-percent" onClick={() => { handleSortButtonClick("activeSicks") }}>
                            חולים פעילים
                             {tableState.isTriangleShow && tableState.sortBy === "activeSicks" &&
-                                <GoTriangleUp size={8} color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " triangle-flip" : "")} />
+                                <div className={"triangle2"+(tableState.isReversedSort?" upside-down":"")}></div>
+                                //<GoTriangleUp size={8} color="#5ea5f5" className={"triangle" + (tableState.isReversedSort ? " upside-down" : "")} />
                             }
                         </button>
                     </div>

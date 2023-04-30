@@ -14,7 +14,7 @@ function TableSquareWithBar(props){
                 }}>
                 </div>
             </div>}
-            {props.showBar?(props.percentage+"%"):props.informationWithoutBar}
+            {props.showBar?(props.percentage+"%"):props.contentWithoutBar}
         </div>
     )
 }

@@ -61,46 +61,46 @@ function VerifiedChildrenTrendChart(props){
                 <ResponsiveContainer>
                     <LineChart data={verifiedChildrenTrendChart.slice(verifiedChildrenTrendChart.length-periodShow)}>
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages0To4"}
                             strokeOpacity={1}
-                            strokeWidth={4}
+                            strokeWidth={2}
                             stroke="#50cbfd"
                             fill="#50cbfd"
                             dot={false}
                             activeDot={{fill:"#50cbfd", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages5To11"}
                             strokeOpacity={1}
-                            strokeWidth={4}
+                            strokeWidth={2}
                             stroke="#b6ca51"
                             fill="#b6ca51"
                             dot={false}
                             activeDot={{fill:"#b6ca51", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages12To15"}
                             strokeOpacity={1}
-                            strokeWidth={4}
+                            strokeWidth={2}
                             stroke="#237d7d"
                             fill="#237d7d"
                             dot={false}
                             activeDot={{fill:"#237d7d", stroke:"white", strokeWidth:0.7, r:6}}
                         />
                         <Line
-                            type="monotone"
+                            type="linear"
                             dataKey={"ages16To19"}
                             strokeOpacity={1}
-                            strokeWidth={4}
+                            strokeWidth={2}
                             stroke="#baa1ef"
                             fill="#baa1ef"
                             dot={false}
                             activeDot={{fill:"#baa1ef", stroke:"white", strokeWidth:0.7, r:6}}
                         />
-                        <XAxis tickMargin={3} dataKey="date" style={{fontSize:12}}
+                        <XAxis tickMargin={0} dataKey="date" style={{fontSize:12}} tickLine={{stroke:"#ebf1fa", strokeWidth:1.6}} tickSize={13}
                             minTickGap={6}
                             tickFormatter={date=>(
                                 date.toLocaleDateString("en-GB",{day:"2-digit",month:"2-digit"}).replace("/",".")
@@ -119,7 +119,7 @@ function VerifiedChildrenTrendChart(props){
                             height={35}
                             formatter={value =>(<span className="chart-legend">{value.slice(4).replace("To","-")}</span>)}
                         />
-                        <CartesianGrid vertical={false} stroke="#e7e7e7"/>
+                        <CartesianGrid vertical={false} stroke="#e5e5e5"/>
                         <Tooltip shared={false} content={<GeneralToolTip translations={translations}/>} />
                     </LineChart>
                 </ResponsiveContainer>
